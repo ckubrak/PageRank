@@ -18,3 +18,12 @@ std::vector<double> CSR::multiply (std::vector<double>& v)
     return res;
 }
 
+// Rompe encapsulamiento, pero la usamos para tests
+// TODO Borrarla
+CSR::CSR(std::vector<double> val, std::vector<int> IA, std::vector<int> JA, int n)
+{
+    _n = n;
+    _val = val;
+    _IA = IA;
+    _JA = JA;
+}
