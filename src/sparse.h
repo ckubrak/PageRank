@@ -3,23 +3,37 @@
 
 #include <vector>
 #include <iostream>
+#include <map>
+#include <iterator>
 
 typedef std::vector<double > Vector;
-// The CSR format saves on memory only when NNZ < (m (n − 1) − 1) / 2
-class CSR
+
+class DOK
 {
 public:
-    CSR();
-    CSR(int n);
-    CSR(std::vector<double> val, std::vector<int> IA, std::vector<int> JA, int n);
-    CSR(const CSR&);
-    CSR& operator= (const CSR&);
-    std::vector<double> multiply (std::vector<double>& v);
+    typedef std::map<size_t, std::map<size_t , double> > matriz;
+    typedef matriz::iterator iter_fila;
 
+    typedef std::map<size_t, double> columnas;
+    typedef columnas::iterator iter_col;
+
+    DOK (size_t n);
+
+    Vector eliminacionGauss (Vector& b);
+    Vector operator*(const Vector& x);
+    double& operator()(size_t i, size_t j)
+    {
+        return _mat[i][j];
+    }
+
+    std::vector<Vector> matrizCompleta();
 private:
-    std::vector<double> _val;
-    std::vector<int> _IA;
-    std::vector<int> _JA;
-    int _n;
+    matriz _mat;
+    size_t _n;
+
+    Vector resolverSistema();
 };
+
+
+void mostrarMatriz(DOK&);
 #endif
