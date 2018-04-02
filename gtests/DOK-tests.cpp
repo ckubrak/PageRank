@@ -114,3 +114,9 @@ TEST(DOK_Velocidad, Gauss150x150)
 
     EXPECT_LT(timeElapsed/1000000,2); //Puede fallar segun la computadora. A mi (Cristian) me pasa
 }
+
+TEST(DOK_Construccion, txt15)
+{
+    DOK contruir("../tests_tp1/tests_tp1/test_30_segundos.txt");
+    // mostrarMatriz(contruir);
+}

@@ -5,6 +5,7 @@
 #include <iostream>
 #include <map>
 #include <iterator>
+#include <fstream>
 
 typedef std::vector<double > Vector;
 
@@ -18,6 +19,7 @@ public:
     typedef columnas::iterator iter_col;
 
     DOK (size_t n);
+    DOK(const char* input);
 
     Vector eliminacionGauss (Vector& b);
     Vector operator*(const Vector& x);
@@ -27,6 +29,7 @@ public:
     }
 
     std::vector<Vector> matrizCompleta();
+
 private:
     matriz _mat;
     size_t _n;

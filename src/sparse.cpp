@@ -24,6 +24,7 @@ Vector DOK::operator*(const Vector& x)
     return y;
 }
 
+//TODO si sobra tiempo ver si puedo hacerlo con iteradores
 Vector DOK::eliminacionGauss(Vector& b)
 {
     double mult;
@@ -91,8 +92,24 @@ Vector DOK::resolverSistema()
     return x;
 }
 
+DOK::DOK(const char* input)
+{
+    int m,from,to;
+    std::ifstream infile(input);
+    std::string line;
+    int i =0; //Para contar las lineas
+    infile >> _n;
+    infile >> m;
+    for( std::string line; std::getline( infile, line ); )
+    {
+            infile >> from >> to;
+            _mat[from][to] = 1;
+    }
+
+}
 
 // Testing only
+// TODO borrar antes de entregar matrizCompleta
 std::vector<Vector> DOK::matrizCompleta()
 {
     std::vector<Vector> res(_n);
@@ -118,6 +135,7 @@ std::vector<Vector> DOK::matrizCompleta()
     return res;
 }
 
+// TODO borrar antes de entregar mostrarMatriz
 void mostrarMatriz(DOK& dok)
 {
     std::vector<Vector> vectorDeVectores = dok.matrizCompleta();
