@@ -42,7 +42,7 @@ Vector DOK::eliminacionGauss(Vector& b)
     {
         for (int i = k+1 ; i < _n + 1; i++)
         {
-            if (_mat.count(i) == 0 && _mat[i].count(k) == 0)
+            if (_mat.count(i) == 0 || _mat[i].count(k) == 0)
                 {
                     break;
                 }
@@ -53,7 +53,15 @@ Vector DOK::eliminacionGauss(Vector& b)
             }
             for (int j = k ; j < _n + 1  ;j++)
             {
-                    _mat[i][j] -= mult * _mat[k][j];
+                double ij = _mat[i][j] - _mat[i][j] - mult * _mat[k][j];
+                if (ij == 0)
+                {
+                    _mat[i].erase(j);
+                }
+                else
+                {
+                    _mat[i][j] = ij;
+                }
             }
 
         }
