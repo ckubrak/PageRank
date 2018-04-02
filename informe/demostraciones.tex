@@ -1,0 +1,93 @@
+\documentclass[a4paper]{article}
+
+\usepackage[spanish]{babel} % Le indicamos a LaTeX que vamos a escribir en español.
+\usepackage[utf8]{inputenc} % Permite utilizar tildes y eñes normalmente
+\begin{document}
+
+Justificar que:
+\begin{displaymath}
+A = p WD + ez^{t}
+\end{displaymath}
+
+Estudiemos como son los elementos de la matriz $A = p WD + ez^{t}$:
+
+\begin{displaymath}
+(p WD + ez^{t})_{ij} = p(W\,D)_{ij}+(ez^{t})_{ij} = p(\sum_{k=1}^{n}w_{ik}d_{kj}+1\,z^{t})
+\end{displaymath}
+
+Como D es una matriz diagonal, los elementos distintos de cero únicamente pueden estar en la diagonal, con lo cual al hacer el producto se anulan todos los términos con $k\not=j$ y también aquellos términos donde $w_{ik}=0$ lo cual ocurre cuando $c_j=0$.
+
+En consecuencia se puede reescribir:
+
+\begin{displaymath}
+(p WD + ez^{t})_{ij} = p(w_{ij}d_{jj}+z^{t})
+\end{displaymath}
+
+Vamos a separar en casos para analizar los posibles valores que puede tomar el elemento (notar que por la definición de D, la condición $d_{jj}=0$ es equivalente a $c_j=0$):
+
+caso 1: $w_{ij}=0, d_{jj}=0$ ($c_j=0$)$\Rightarrow(p WD + ez^{t})_{ij} =z_j^t=1/n$
+
+
+caso 2: $w_{ij}=0, d_{jj}\not=0$ ($c_j\not=0$)$\Rightarrow(p WD + ez^{t})_{ij} =z_j^t=(1-p)/n$
+
+
+caso 3: $w_{ij}=1, d_{jj}=0$ ($c_j=0$)$\Rightarrow(p WD + ez^{t})_{ij} =z_j^t=1/n$
+
+
+caso 4: $w_{ij}=1, d_{jj}\not=0$ ($c_j\not=0$)$\Rightarrow(p WD + ez^{t})_{ij} =p/c_j+z_j^t=p/c_j+(1-p)/n$
+
+Observando los casos 2 y 4 podemos observar que se pueden  unificar en una condición equivalente: $(p WD + ez^{t})_{ij} =w_{ij}p/c_j+z_j^t=p/c_j+(1-p)/n$
+
+Uniendo todo lo anterior tenemos que:
+
+
+\begin{equation}
+ (p WD + ez^{t})_{ij} = \left\{
+    \begin{array}{ll}
+	 p\,w_{ij}/c_j+z_j^t=(1-p)/n+p/c_j & \mathrm{si\ } c_j \not= 0 \\
+	 1/n & \mathrm{si\ } c_j=0
+	 \end{array}
+   \right.
+\end{equation}
+Pero precisamente esto coincide con la definición de los elementos de la matriz A. Luego $A = p WD + ez^{t}$.
+%demostracion 2como se garantiza la aplicabilidad de EG
+
+¿Cómo se garantiza la aplicabilidad de la Eliminación Gaussiana? ¿La matriz $I-pWD$ está bien condicionada?¿Cómo influye el valor de p?
+
+Sea $B=W\,D$,
+\begin{displaymath}
+B_{ij}=\sum_{k=1}^n w_{ik}d_{kj}
+\end{displaymath}
+
+Por la definición de D, cuando $k\not=j$, $d_{kj}=0$, por lo tanto se anulan los correspondientes términos de la sumatoria, quedando:
+
+\begin{displaymath}
+B_{ij}=w_{ij}d_{jj}
+\end{displaymath}
+
+También sabemos por la definición de W que $w_{jj}=0$ (porque no se consideran los autolinks), así que podemos deducir que los elementos de la diagonal van a ser iguales a cero, luego:
+
+\begin{equation}
+ B_{ij} = \left\{
+    \begin{array}{ll}
+	 0 & \mathrm{si\ } i=j \\
+	 1/c_j & \mathrm{si\ } i\not=j,  w_{ij}\not=0
+	 \end{array}
+   \right.
+\end{equation}
+
+Y por lo tanto:
+
+\begin{equation}
+(I-p B)_{ij} = \left\{
+    \begin{array}{ll}
+	 1 & \mathrm{si\ } i=j \\
+	 -p/c_j & \mathrm{sii\ } i\not=j
+	 \end{array}
+   \right.
+\end{equation}
+
+La matriz B tiene la particularidad de que la suma de los elementos de cada columna es igual a 1, ya que en cada columna hay $c_j$ elementos de valor $1/c_j$. Por lo tanto en $I-p B$ la suma de los elementos de cada columna es $1+c_j p/c_j$ con $c_j p/c_j<1$ porque $p<1$. De esto se desprende que $(I-p B)^t$ es estrictamente diagonal dominante y como se probó en la teórica esto implica que sea no singular. Además, si una matriz es e.d.d. cada una de sus submatrices principales es e.d.d. y entonces todas son no singulares. Además se puede probar que si una matriz tiene inversa, su traspuesta tiene inversa. Luego podemos afirmar que (I-p B) es no singular y que todas sus submatrices menores también son no singulares, luego (I-p B) tiene descomposición LU que es equivalente a decir que puede realizarse la Eliminación Gaussiana sin que aparezca un cero en la diagonal en ninguno de los pasos del proceso.
+
+\end{document}
+
