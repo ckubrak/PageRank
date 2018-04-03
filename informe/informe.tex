@@ -1,8 +1,12 @@
 \documentclass[a4paper]{article}
+%\usepackage{a4wide} % márgenes un poco más anchos que lo usual
+
 
 \usepackage[spanish]{babel} % Le indicamos a LaTeX que vamos a escribir en español.
 \usepackage[utf8]{inputenc} % Permite utilizar tildes y eñes normalmente
 \usepackage{caratula} % Se puede descargar en ~> https://github.com/bcardiff/dc-tex
+\usepackage[breaklinks=true]{hyperref}
+
 
 \begin{document} % Todo lo que escribamos a partir de aca va a aparecer en el documento.
 
@@ -10,7 +14,7 @@
 %\sloppy
 
 % Completar los datos de la caratula
-\titulo{TP1 - Page Rank} 
+\titulo{Trabajo Práctico 1 - Page Rank} 
 \fecha{\today}
 \materia{Métodos Numéricos}
 \grupo{Grupo (número de grupo)}
@@ -19,19 +23,44 @@
 \integrante{Facundo, Araujo}{(LU)}{(email)}
 \integrante{Cristian, Cubrak}{(LU)}{(email)}
 \integrante{Marela Alejandra, Herrera}{(LU)}{(email)}
-\integrante{Luis Fernando, Greco}{150/15}{(email)}
+\integrante{Luis Fernando, Greco}{150/15}{luifergreco@gmail.com}
 
 
 \maketitle
 
 % Aca comienzan a escribir su informe
+\tableofcontents
 
-\input{introduccion.tex}
-\input{demostraciones.tex}
-\input{resultados.tex}
-\input{discucion.tex}
-\input{conclusiones.tex}
-\input{apendices.tex}
-\input{referencias.tex}
+\newpage
+
+\section{Introducción}
+\input{introduccion}
+
+\section{Demostraciones}
+\input{demostraciones}
+
+\section{Resultados}
+\input{resultados}
+
+\section{Discusión}
+\input{discusion}
+
+\section{Conclusiones}
+\input{conclusiones}
+
+\section{Apendices}
+\input{apendices}
+
+\section{Referencias}
+\input{referencias}
+
+% \input{introduccion.tex}
+% \input{demostraciones.tex}
+% \input{resultados.tex}
+% \input{discucion.tex}
+% \input{conclusiones.tex}
+% \input{apendices.tex}
+% \input{referencias.tex}
+ 
 
 \end{document}
