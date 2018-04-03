@@ -82,12 +82,12 @@ Y por lo tanto:
 (I-p B)_{ij} = \left\{
     \begin{array}{ll}
 	 1 & \mathrm{si\ } i=j \\
-	 -p/c_j & \mathrm{sii\ } i\not=j
+	 -p/c_j & \mathrm{si\ } i\not=j
 	 \end{array}
    \right.
 \end{equation}
 
-La matriz B tiene la particularidad de que la suma de los elementos de cada columna es igual a 1, ya que en cada columna hay $c_j$ elementos de valor $1/c_j$. Por lo tanto en $I-p B$ la suma de los elementos de cada columna es $1+c_j p/c_j$ con $c_j p/c_j<1$ porque $p<1$. De esto se desprende que $(I-p B)^t$ es estrictamente diagonal dominante y como se probó en la teórica esto implica que sea no singular. Además, si una matriz es e.d.d. cada una de sus submatrices principales es e.d.d. y entonces todas son no singulares. Además se puede probar que si una matriz tiene inversa, su traspuesta tiene inversa. Luego podemos afirmar que (I-p B) es no singular y que todas sus submatrices menores también son no singulares, luego (I-p B) tiene descomposición LU que es equivalente a decir que puede realizarse la Eliminación Gaussiana sin que aparezca un cero en la diagonal en ninguno de los pasos del proceso.
+La matriz B tiene la particularidad de que la suma de los elementos de cada columna es igual a 1, ya que en cada columna hay $c_j$ elementos de valor $1/c_j$. Por lo tanto en $I-p B$ la suma de los elementos de cada columna es $1+c_j\, p/c_j$ con $|c_j\, p/c_j|<1$ porque $0<p<1$. De esto se desprende que $(I-p B)^t$ es estrictamente diagonal dominante y como se probó en la teórica esto implica que sea no singular. Además, si una matriz es e.d.d. cada una de sus submatrices principales es e.d.d. y entonces todas son no singulares. Por otra parte se puede probar que si una matriz tiene inversa, su traspuesta tiene inversa. Luego podemos afirmar que $(I-p B)$ es no singular y que todas sus submatrices principales también son no singulares, luego $(I-p B)$ tiene descomposición $LU$ que es equivalente a decir que puede realizarse la Eliminación Gaussiana sin que aparezca un cero en la diagonal en ninguno de los pasos del proceso.
 
 \end{document}
 
