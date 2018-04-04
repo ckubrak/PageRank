@@ -23,6 +23,8 @@ public:
 
     Vector eliminacionGauss (Vector& b);
     Vector operator*(const Vector& x);
+
+    DOK& operator*(const double c);
     double& operator()(size_t i, size_t j)
     {
         return _mat[i][j];

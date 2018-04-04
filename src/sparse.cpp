@@ -24,6 +24,18 @@ Vector DOK::operator*(const Vector& x)
     return y;
 }
 
+DOK& DOK::operator*(const double c)
+{
+    for (int i = 0; i <_mat.size(); i++)
+    {
+        if (_mat.count(i) > 0)
+            for (int j = 0; j < _mat[i].size(); j++)
+            {
+                _mat[i][j] = c * _mat[i][j];
+            }
+    }
+}
+
 //TODO si sobra tiempo ver si puedo hacerlo con iteradores
 Vector DOK::eliminacionGauss(Vector& b)
 {
