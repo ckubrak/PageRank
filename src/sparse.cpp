@@ -4,6 +4,23 @@ DOK::DOK(size_t n)
     _n = n;
 }
 
+DOK::DOK(const char* input)
+{
+    int m,from,to;
+    std::ifstream infile(input);
+    std::string line;
+    int i =0; //Para contar las lineas
+    infile >> _n;
+    infile >> m;
+    for( std::string line; std::getline( infile, line ); )
+    {
+        infile >> from >> to;
+        _mat[from][to] = 1;
+    }
+
+}
+
+
 Vector DOK::operator*(const Vector& x)
 {
 
@@ -104,21 +121,6 @@ Vector DOK::resolverSistema()
     return x;
 }
 
-DOK::DOK(const char* input)
-{
-    int m,from,to;
-    std::ifstream infile(input);
-    std::string line;
-    int i =0; //Para contar las lineas
-    infile >> _n;
-    infile >> m;
-    for( std::string line; std::getline( infile, line ); )
-    {
-            infile >> from >> to;
-            _mat[from][to] = 1;
-    }
-
-}
 
 // Testing only
 // TODO borrar antes de entregar matrizCompleta
