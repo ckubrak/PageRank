@@ -1,3 +1,10 @@
 build/
 *.aux
 *.log
+informe/*.pdf
+informe/auto/
+*.gz
+*.fmt
+*.ini
+
+
