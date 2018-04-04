@@ -23,6 +23,7 @@ public:
     DOK(const char* input);
 
     void sumarMatrices(DOK& m);
+    void restarMatrices(DOK& m);
     Vector eliminacionGauss (Vector& b);
     Vector operator*(const Vector& x);
 

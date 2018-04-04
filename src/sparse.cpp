@@ -31,6 +31,10 @@ DOK::DOK(size_t n, double val)
     }
 }
 
+void DOK::restarMatrices(DOK& m)
+{
+    sumarMatrices(m*(-1.0));
+}
 void DOK::sumarMatrices(DOK& m)
 {
     for (int i = 0; i < _n; i++)
