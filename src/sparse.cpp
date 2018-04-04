@@ -10,7 +10,6 @@ DOK::DOK(const char* input)
     int from,to;
     std::ifstream infile(input);
     std::string line;
-    int i =0; //Para contar las lineas
     infile >> _n;
     infile >> _m;
     for( std::string line; std::getline( infile, line ); )
