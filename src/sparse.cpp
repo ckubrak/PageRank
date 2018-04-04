@@ -31,6 +31,31 @@ DOK::DOK(size_t n, double val)
     }
 }
 
+void DOK::sumarMatrices(DOK& m)
+{
+    for (int i = 0; i < _n; i++)
+    {
+        for (int j = 0; j < _n; j++)
+        {
+            if (_mat.count(i) > 0 && _mat[i].count(j) > 0)
+            {
+                if(m._mat.count(i) > 0 && m._mat[i].count(j) > 0)
+                {
+                    _mat[i][j] += m._mat[i][j];
+                }
+            }
+            else
+            {
+                if(m._mat.count(i) > 0 && m._mat[i].count(j) > 0)
+                {
+                    _mat[i][j] = m._mat[i][j];
+                }
+            }
+        }
+    }
+}
+
+
 Vector DOK::operator*(const Vector& x)
 {
 
@@ -94,6 +119,7 @@ Vector DOK::eliminacionGauss(Vector& b)
             for (int j = k ; j < _n + 1  ;j++)
             {
                 double ij = _mat[i][j] - mult * _mat[k][j];
+                //TODO cambiar por epsilon
                 if (ij == 0)
                 {
                     _mat[i].erase(j);
