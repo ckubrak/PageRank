@@ -211,7 +211,10 @@ DOK& DOK::matrizDBalance()
 	DOK diagonalVacia(_n, 0);
 	for (int i = 0; i < _n; i++)
 	{
-	diagonalVacia._mat[i][i] = (1 / Cj(i));
+		int cj = Cj(i);
+		if(cj != 0){ //Como Cj(i) es suma de unos y ceros, no tengo problema con el operador ==
+			diagonalVacia._mat[i][i] = (1 / cj);
+		}
 	} 
 }
 
