@@ -83,12 +83,12 @@ Vector DOK::eliminacionGauss(Vector& b)
         for (int i = k+1 ; i < _n + 1; i++)
         {
             if (_mat.count(i) == 0 || _mat[i].count(k) == 0)
-                {
-                    break;
-                }
+            {
+                break;
+            }
             else
             {
-               mult = _mat[i][k] / _mat[k][k];
+                mult = _mat[i][k] / _mat[k][k];
 
             }
             for (int j = k ; j < _n + 1  ;j++)
@@ -178,20 +178,20 @@ void mostrarMatriz(DOK& dok)
 //TODO testear estas dos
 DOK& DOK::matrizDBalance()
 {
-	DOK vacia(_n);
-	for (int i = 0; i < _n; i++)
-	{
-	vacia._mat[i][i] = (1 / Cj(i));
-	} 
+    DOK vacia(_n);
+    for (int i = 0; i < _n; i++)
+    {
+        vacia._mat[i][i] = (1 / Cj(i));
+    } 
 }
 
 int DOK::Cj(int j){
-	int Cj = 0;
-	for (int i = 0; i < _n; i++) //i son filas, j es la columna fija
-	{
-		Cj += _mat[i][j];
-	}
-	return Cj; //Cj son la cantidad de links salientes de la pagina j
+    int Cj = 0;
+    for (int i = 0; i < _n; i++) //i son filas, j es la columna fija
+    {
+        Cj += _mat[i][j];
+    }
+    return Cj; //Cj son la cantidad de links salientes de la pagina j
 }
 
 //Caminante aleatorio:
