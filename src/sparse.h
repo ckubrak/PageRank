@@ -36,6 +36,7 @@ public:
 private:
     matriz _mat;
     size_t _n;
+    size_t _m; // Cantidad de links
 
     Vector resolverSistema();
 };

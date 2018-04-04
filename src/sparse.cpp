@@ -2,20 +2,22 @@
 DOK::DOK(size_t n)
 {
     _n = n;
+    _m = 0;
 }
 
 DOK::DOK(const char* input)
 {
-    int m,from,to;
+    int from,to;
     std::ifstream infile(input);
     std::string line;
     int i =0; //Para contar las lineas
     infile >> _n;
-    infile >> m;
+    infile >> _m;
     for( std::string line; std::getline( infile, line ); )
     {
         infile >> from >> to;
         _mat[from][to] = 1;
+        _m++;
     }
 
 }
@@ -26,6 +28,7 @@ DOK::DOK(size_t n, double val)
     for (int i = 0; i < _n; i++)
     {
         _mat[i][i] = val;
+        _m ++;
     }
 }
 
