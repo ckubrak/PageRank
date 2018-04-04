@@ -94,7 +94,7 @@ Vector DOK::eliminacionGauss(Vector& b)
             }
             for (int j = k ; j < _n + 1  ;j++)
             {
-                double ij = _mat[i][j] - _mat[i][j] - mult * _mat[k][j];
+                double ij = _mat[i][j] - mult * _mat[k][j];
                 if (ij == 0)
                 {
                     _mat[i].erase(j);
@@ -174,3 +174,26 @@ void mostrarMatriz(DOK& dok)
     }
     std::cout << "\n";
 }
+
+//Esta funcion es para armar la matriz diagonal D, la de "balance"
+//TODO testear estas dos
+DOK& DOK::matrizDBalance()
+{
+	DOK vacia(_n);
+	for (int i = 0; i < _n; i++)
+	{
+	vacia._mat[i][i] = (1 / Cj(i));
+	} 
+}
+
+int DOK::Cj(int j){
+	int Cj = 0;
+	for (int i = 0; i < _n; i++) //i son filas, j es la columna fija
+	{
+		Cj += _mat[i][j];
+	}
+	return Cj; //Cj son la cantidad de links salientes de la pagina j
+}
+
+//Caminante aleatorio:
+

@@ -32,12 +32,14 @@ public:
     }
 
     std::vector<Vector> matrizCompleta();
+    DOK& matrizDBalance();
 
 private:
     matriz _mat;
     size_t _n;
     size_t _m; // Cantidad de links
 
+    int Cj(int j);
     Vector resolverSistema();
 };
 
