@@ -20,6 +20,14 @@ DOK::DOK(const char* input)
 
 }
 
+DOK::DOK(size_t n, double val)
+{
+    _n = n;
+    for (int i = 0; i < _n; i++)
+    {
+        _mat[i][i] = val;
+    }
+}
 
 Vector DOK::operator*(const Vector& x)
 {

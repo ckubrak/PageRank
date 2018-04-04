@@ -19,6 +19,7 @@ public:
     typedef columnas::iterator iter_col;
 
     DOK (size_t n);
+    DOK (size_t n, double val); // Crea matriz diagonal
     DOK(const char* input);
 
     Vector eliminacionGauss (Vector& b);

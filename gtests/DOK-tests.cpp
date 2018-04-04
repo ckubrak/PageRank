@@ -3,6 +3,15 @@
 #include <chrono>
 
 
+TEST(DOK_Diagonal, Nula)
+{
+    DOK nula (100,0.0);
+}
+
+TEST(DOK_Diagonal, identidad)
+{
+    DOK nula (100,1.0);
+}
 TEST(DOK_MatrizXVector, Nula)
 {
     Vector nulo(100,0.0);
