@@ -178,10 +178,10 @@ void mostrarMatriz(DOK& dok)
 //TODO testear estas dos
 DOK& DOK::matrizDBalance()
 {
-	DOK vacia(_n);
+	DOK diagonalVacia(_n, 0);
 	for (int i = 0; i < _n; i++)
 	{
-	vacia._mat[i][i] = (1 / Cj(i));
+	diagonalVacia._mat[i][i] = (1 / Cj(i));
 	} 
 }
 
@@ -189,7 +189,10 @@ int DOK::Cj(int j){
 	int Cj = 0;
 	for (int i = 0; i < _n; i++) //i son filas, j es la columna fija
 	{
-		Cj += _mat[i][j];
+		if(_mat.count(i) > 0 && _mat[i].count(j) > 0)
+		{
+			Cj += _mat[i][j];
+		}
 	}
 	return Cj; //Cj son la cantidad de links salientes de la pagina j
 }
