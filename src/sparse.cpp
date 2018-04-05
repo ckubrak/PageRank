@@ -31,9 +31,28 @@ DOK::DOK(size_t n, double val)
     }
 }
 
+DOK DOK::multiplicarMatriz(DOK &m)
+{
+    DOK C(this->_n);
+    for (size_t i=0; i < this->size(); ++i)
+        if(_mat.count(i) != 0)
+            for (size_t j=0; j < this->size(); ++j)
+            {
+                if(_mat[i].count(j))
+                    for (size_t k=0; k < this->size(); ++k)
+                    {
+                        if (m._mat.count(k) > 0 && m._mat[k].count(j) > 0)
+                        {
+                            C._mat[i][j] = this->_mat[i][k] * m._mat[k][j];
+                        }
+                    }
+            }
+    return C;
+}
 void DOK::restarMatrices(DOK& m)
 {
-    sumarMatrices(m*(-1.0));
+    m.multiplicarConstante(-1.0);
+    sumarMatrices(m);
 }
 void DOK::sumarMatrices(DOK& m)
 {
@@ -80,14 +99,15 @@ Vector DOK::operator*(const Vector& x)
     return y;
 }
 
-DOK& DOK::operator*(const double c)
+void DOK::multiplicarConstante(double c)
 {
     for (int i = 0; i <_mat.size(); i++)
     {
         if (_mat.count(i) > 0)
             for (int j = 0; j < _mat[i].size(); j++)
             {
-                _mat[i][j] = c * _mat[i][j];
+                if (_mat[i].count(j) > 0)
+                    _mat[i][j] = c * _mat[i][j];
             }
     }
 }
@@ -206,16 +226,30 @@ void mostrarMatriz(DOK& dok)
 
 //Esta funcion es para armar la matriz diagonal D, la de "balance"
 //TODO testear estas dos
-DOK& DOK::matrizDBalance()
+DOK::DOK(const DOK& m)
 {
-	DOK diagonalVacia(_n, 0);
+    _n = m._n;
+    for (int i = 0; i < _n; i++)
+    {
+        int cj = Cj(i);
+        if(cj != 0)
+        {
+            _mat[i][i] = (1 / cj);
+        }
+    }
+}
+DOK DOK::crearD()
+{
+	DOK diagonal(_n, 0);
 	for (int i = 0; i < _n; i++)
 	{
 		int cj = Cj(i);
-		if(cj != 0){ //Como Cj(i) es suma de unos y ceros, no tengo problema con el operador ==
-			diagonalVacia._mat[i][i] = (1 / cj);
+		if(cj != 0)
+    {
+			diagonal._mat[i][i] = (1 / cj);
 		}
-	} 
+	}
+  return diagonal;
 }
 
 int DOK::Cj(int j){

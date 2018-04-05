@@ -21,13 +21,16 @@ public:
     DOK (size_t n);
     DOK (size_t n, double val); // Crea matriz diagonal
     DOK(const char* input);
+    DOK(const DOK& m);
 
     void sumarMatrices(DOK& m);
     void restarMatrices(DOK& m);
     Vector eliminacionGauss (Vector& b);
     Vector operator*(const Vector& x);
 
-    DOK& operator*(const double c);
+    void multiplicarConstante(double c);
+    DOK multiplicarMatriz(DOK& m);
+    // DOK& operator*(const double c);
 
     double& operator()(size_t i, size_t j)
     {
@@ -35,7 +38,11 @@ public:
     }
 
     std::vector<Vector> matrizCompleta();
-    DOK& matrizDBalance();
+    DOK crearD();
+    size_t size()
+    {
+        return _n;
+    }
 
 private:
     matriz _mat;
