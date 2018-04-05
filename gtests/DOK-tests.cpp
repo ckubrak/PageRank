@@ -126,6 +126,16 @@ TEST(DOK_Velocidad, Gauss150x150)
 
 TEST(DOK_Construccion, txt15)
 {
-    DOK contruir("../tests_tp1/tests_tp1/test_30_segundos.txt");
+    std::chrono::steady_clock::time_point begin = std::chrono::steady_clock::now();
+    Vector nulo(3000,0.0);
+    DOK construir("../tests_tp1/tests_tp1/test_30_segundos.txt");
+
+    EXPECT_EQ(construir.eliminacionGauss(nulo),nulo);
+
+    std::chrono::steady_clock::time_point end= std::chrono::steady_clock::now();
+    int timeElapsed = std::chrono::duration_cast<std::chrono::microseconds>(end - begin).count();
+
+    std::cout << timeElapsed/1000000;
+    // EXPECT_LT(timeElapsed/1000000,2); //Puede fallar segun la computadora. A mi (Cristian) me pasa
     // mostrarMatriz(contruir);
 }
