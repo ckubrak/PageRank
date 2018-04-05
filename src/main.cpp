@@ -12,6 +12,7 @@ int main (int argc, char** argv)
     std::ofstream output("archivo.out");
 
     DOK w(archivo);
+    mostrarMatriz(w);
     std::cout << "w levantado" << std::endl;
     w.multiplicarConstante(p);
     std::cout << "p.W"<< std::endl;;

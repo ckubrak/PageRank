@@ -15,7 +15,7 @@ DOK::DOK(const char* input)
     for( std::string line; std::getline( infile, line ); )
     {
         infile >> from >> to;
-        _mat[from][to] = 1;
+        _mat[from-1][to-1] = 1;
         _m++;
     }
 
@@ -43,7 +43,10 @@ DOK DOK::multiplicarMatriz(DOK &m)
                     {
                         if (m._mat.count(k) > 0 && m._mat[k].count(j) > 0)
                         {
-                            C._mat[i][j] = this->_mat[i][k] * m._mat[k][j];
+                            if (C._mat.count(i) > 0 && C._mat[j].count(j) > 0)
+                                C._mat[i][j] += this->_mat[i][k] * m._mat[k][j];
+                            else
+                                C._mat[i][j] = this->_mat[i][k] * m._mat[k][j];
                         }
                     }
             }
