@@ -12,15 +12,21 @@ int main (int argc, char** argv)
     std::ofstream output("archivo.out");
 
     DOK w(archivo);
-    mostrarMatriz(w);
     std::cout << "w levantado" << std::endl;
+    // mostrarMatriz(w);
+
     w.multiplicarConstante(p);
     std::cout << "p.W"<< std::endl;;
+    // mostrarMatriz(w);
+
     DOK d(w);
     std::cout << "d"<< std::endl;;
+    // mostrarMatriz(d);
 
     DOK identidad(d.size(),1);
     std::cout << "id"<< std::endl;;
+
+    // mostrarMatriz(d);
     w.multiplicarMatriz(d);
     std::cout << "WxD"<< std::endl;;
     identidad.restarMatrices(w);
@@ -33,7 +39,7 @@ int main (int argc, char** argv)
     std::chrono::steady_clock::time_point end= std::chrono::steady_clock::now();
     int timeElapsed = std::chrono::duration_cast<std::chrono::microseconds>(end - begin).count();
 
-    std::cout << timeElapsed/1000000;
+    std::cout << timeElapsed/1000000 << std::endl;
     for (int i =0; i< w.size();i++)
     {
         std::cout << resultado[i] << " ";

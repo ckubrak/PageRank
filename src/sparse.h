@@ -21,7 +21,7 @@ public:
     DOK (size_t n);
     DOK (size_t n, double val); // Crea matriz diagonal
     DOK(const char* input);
-    DOK(const DOK& m);
+    DOK(DOK& m);
 
     void sumarMatrices(DOK& m);
     void restarMatrices(DOK& m);
@@ -49,7 +49,7 @@ private:
     size_t _n;
     size_t _m; // Cantidad de links
 
-    int Cj(int j);
+    int Cj(int j, DOK& m);
     Vector resolverSistema();
 };
 

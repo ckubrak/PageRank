@@ -229,39 +229,26 @@ void mostrarMatriz(DOK& dok)
 
 //Esta funcion es para armar la matriz diagonal D, la de "balance"
 //TODO testear estas dos
-DOK::DOK(const DOK& m)
+DOK::DOK(DOK& m)
 {
     _n = m._n;
-    for (int i = 0; i < _n; i++)
+    for (int j = 0; j < _n; j++)
     {
-        int cj = Cj(i);
+        int cj = Cj(j,m);
         if(cj != 0)
         {
-            _mat[i][i] = (1 / cj);
+            _mat[j][j] = (1 / cj);
         }
     }
 }
-DOK DOK::crearD()
-{
-	DOK diagonal(_n, 0);
-	for (int i = 0; i < _n; i++)
-	{
-		int cj = Cj(i);
-		if(cj != 0)
-    {
-			diagonal._mat[i][i] = (1 / cj);
-		}
-	}
-  return diagonal;
-}
 
-int DOK::Cj(int j){
+int DOK::Cj(int j, DOK& m){
 	int Cj = 0;
 	for (int i = 0; i < _n; i++) //i son filas, j es la columna fija
 	{
-		if(_mat.count(i) > 0 && _mat[i].count(j) > 0)
+		if(m._mat.count(i) > 0 && m._mat[i].count(j) > 0)
 		{
-			Cj += _mat[i][j];
+			Cj += m._mat[i][j];
 		}
 	}
 	return Cj; //Cj son la cantidad de links salientes de la pagina j
