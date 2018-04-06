@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <chrono>
 
+void normalizarVector(Vector& v);
 int main (int argc, char** argv)
 {
     std::chrono::steady_clock::time_point begin = std::chrono::steady_clock::now();
@@ -40,11 +41,27 @@ int main (int argc, char** argv)
     int timeElapsed = std::chrono::duration_cast<std::chrono::microseconds>(end - begin).count();
 
     std::cout << timeElapsed/1000000 << std::endl;
-    for (int i =0; i< w.size();i++)
+
+    normalizarVector(resultado);
+
+    for (int i =0; i< resultado.size();i++)
     {
         std::cout << resultado[i] << " ";
     }
 
 
     return 0;
+}
+
+void normalizarVector(Vector& v)
+{
+    double total = 0;
+    for (int i = 0; i< v.size(); i++)
+    {
+        total += v[i];
+    }
+    for (int i = 0; i< v.size(); i++)
+    {
+        v[i] /= total;
+    }
 }
