@@ -1,6 +1,10 @@
 #ifndef SPARCE_H
 #define SPARCE_H
-
+#include <limits>
+#include <iomanip>
+#include <type_traits>
+#include <algorithm>
+#include <cmath>       /* fabs */
 #include <vector>
 #include <iostream>
 #include <map>

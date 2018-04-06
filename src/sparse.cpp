@@ -105,10 +105,10 @@ Vector DOK::operator*(const Vector& x)
 void DOK::multiplicarConstante(double c)
 {
 
-    for (int i = 0; i <_mat.size(); i++)
+    for (int i = 0; i <size(); i++)
     {
         if (_mat.count(i) > 0)
-            for (int j = 0; j < _m; j++)
+            for (int j = 0; j < size(); j++)
             {
                 if (_mat[i].count(j) > 0){
                     _mat[i][j] = c * _mat[i][j];
@@ -133,9 +133,9 @@ Vector DOK::eliminacionGauss(Vector& b)
         }
     }
 
-    for (int k = 0; k < _n; k++)
+    for (int k = 0; k < b.size() ; k++)
     {
-        for (int i = k+1 ; i < _n + 1; i++)
+        for (int i = k+1 ; i < _n ; i++)
         {
             if (_mat.count(i) == 0 || _mat[i].count(k) == 0)
                 {
@@ -146,11 +146,11 @@ Vector DOK::eliminacionGauss(Vector& b)
                mult = _mat[i][k] / _mat[k][k];
 
             }
-            for (int j = k ; j < _n + 1  ;j++)
+            for (int j = k ; j < _n;j++)
             {
                 double ij = _mat[i][j] - mult * _mat[k][j];
                 //TODO cambiar por epsilon
-                if (ij == 0)
+                if (std::fabs(ij) < 0.0001)
                 {
                     _mat[i].erase(j);
                 }
@@ -170,20 +170,47 @@ Vector DOK::resolverSistema()
 {
     // TODO discutir esto (Si no le agrego 1 a _n no lo podria printear pero no es necesario para la entrega)
 
-    int n = _n - 1;
-    Vector x(n,0);
-
-    x[n-1] = _mat[n-1][n] / _mat[n-1][n-1];
-
-    double sum = 0;
-    for (int i = n-2; i >= 0 ; i-- )
+    int n = n-2;
+    Vector x(_n-1,0.0);
+    for (int i = _n-2; i >= 0; i--)
     {
-        for (int j = i + 1; j <= n-1; j++)
+        x[i] = _mat[i][_n-1];
+        // std::cout << "\n xi: "<< x[i]<< std::endl;
+
+        for(int j = i+1; j <= _n-2; j++)
         {
-            sum += _mat[i][j]*x[j];
+            x[i] = x[i] - _mat[i][j]*x[j];
         }
-        x[i]=(_mat[i][n]-sum)/_mat[i][i];
+        x[i] = x[i]/_mat[i][i];
+        std::cout << "\n x "<< i << " "<< x[i]<< std::endl;
     }
+    // int n = _n - 2;
+    // Vector x(n-1,0);
+
+    // x[n] = _mat[n-1][n] / _mat[n][n];
+    // int n = _n - 1;
+
+    // Vector x(n,0);
+    // for (int i = 1; i >= 1; i++)
+    // {
+    //     x[i] = _mat[i][_n-1];
+    //     // std ::cout <<x[i];
+    // }
+    // x[n] = _mat[n][n+1] / _mat[n][n];
+    // std::cout << x[n-1] << "\n\n\n";
+    // for (int i = n-1; i >= 1 ; i-- )
+    // {
+    //     double sum = 0;
+    //     for (int j = i + 1; j <= n; j++)
+    //     {
+    //             sum += _mat[i][j]*x[j];
+    //     }
+    //     x[i]=(_mat[i][n+1]-sum)/_mat[i][i];
+    //     std::cout << "n: " << n << std::endl;
+    //     std::cout << "i: " << i << std::endl;
+    //     std::cout << "_mat[i][n]: " << _mat[i][n]<< std::endl;
+    //     std::cout << x[i] << std::endl;
+    // }
     return x;
 }
 
@@ -223,7 +250,7 @@ void mostrarMatriz(DOK& dok)
     {
         for (int j = 0; j < vectorDeVectores[0].size(); j++)
         {
-            std::cout << vectorDeVectores[i][j] << " ";
+            std::cout << vectorDeVectores[i][j] << "     ";
         }
         std::cout << "\n";
     }
@@ -243,7 +270,7 @@ DOK::DOK(DOK& m)
         int cj = Cj(j,m);
         if(cj != 0)
         {
-            _mat[j][j] = (1 / cj);
+            _mat[j][j] = (1.0 / double(cj));
         }
     }
 }
