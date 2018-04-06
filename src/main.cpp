@@ -17,12 +17,12 @@ int main (int argc, char** argv)
 
     mostrarMatriz(w);
 
-  std::cout << "antes de llamar a DOK d(w) "<< std::endl;;
+    std::cout << "antes de llamar a DOK d(w) "<< std::endl;;
     DOK d(w);
     std::cout << "d"<< std::endl;;
-     mostrarMatriz(d);
+    mostrarMatriz(d);
 
-       std::cout << "antes de llamar a multiplicarConstante "<< std::endl;;
+    std::cout << "antes de llamar a multiplicarConstante "<< std::endl;;
      w.multiplicarConstante(p);
      std::cout << "p.W" << std::endl;
      mostrarMatriz(w);
@@ -38,7 +38,7 @@ int main (int argc, char** argv)
 
     std::cout << "restarMatrices"<< std::endl;;
 
-mostrarMatriz(identidad);
+    mostrarMatriz(identidad);
 // testeado hasta aqui: OK
 
     Vector sol(w.size(),1);

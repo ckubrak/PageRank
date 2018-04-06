@@ -105,28 +105,17 @@ Vector DOK::operator*(const Vector& x)
 void DOK::multiplicarConstante(double c)
 {
 
-  //mostrarMatriz(*this);
-//std::cout << "multiplicar constante c: " << c << std::endl;
-  //std::cout << "_mat size: " << _mat.size() << std::endl;
     for (int i = 0; i <_mat.size(); i++)
     {
-      //std::cout << "i, _mat.count(i): " << i << " " <<  _mat.count(i) << std::endl;
         if (_mat.count(i) > 0)
-      //  std::cout << "_mat[i].size: " << _mat[i].size() << std::endl;
-            for (int j = 0; j < _mat.size(); j++)
+            for (int j = 0; j < _m; j++)
             {
-    //          std::cout << "_mat size, j: " << _mat[i].size() << " " << j << std::endl;
                 if (_mat[i].count(j) > 0){
-      //            std::cout << "_mat[i].count(j) size, j: " << _mat[i].size() << " " << j << std::endl;
-                  _mat[i][j] = c * _mat[i][j];
-        //          std::cout << "c*_mat[i][j]: " << _mat[i][j] <<  std::endl;
+                    _mat[i][j] = c * _mat[i][j];
                 }
 
             }
     }
-//    std::cout << "antes de salir mult cte: " << std::endl;
-//    mostrarMatriz(*this);
-//    std::cout << "ya mostramos y salimos " << std::endl;
 }
 
 //TODO si sobra tiempo ver si puedo hacerlo con iteradores
@@ -245,9 +234,9 @@ void mostrarMatriz(DOK& dok)
 //TODO testear estas dos
 DOK::DOK(DOK& m)
 {
-  std::cout << "dentro de DOK(m): " << std::endl;
-  mostrarMatriz(m);
-  std::cout << m._n << std::endl;
+  // std::cout << "dentro de DOK(m): " << std::endl;
+  // mostrarMatriz(m);
+  // std::cout << m._n << std::endl;
     _n = m._n;
     for (int j = 0; j < _n; j++)
     {
