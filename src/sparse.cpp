@@ -82,25 +82,25 @@ void DOK::sumarMatrices(DOK& m)
 }
 
 
-Vector DOK::operator*(const Vector& x)
-{
+// Vector DOK::operator*(const Vector& x)
+// {
 
-    Vector y(_n);
-    double sum;
+//     Vector y(_n);
+//     double sum;
 
-    iter_fila fila;
-    iter_col col;
+//     iter_fila fila;
+//     iter_col col;
 
-    for(fila=_mat.begin(); fila!=_mat.end(); fila++){
-        sum=0;
-        for(col=(*fila).second.begin(); col!=(*fila).second.end(); col++){
-            sum += (*col).second * x[(*col).first];
-        }
-        y[(*fila).first]=sum;
-    }
+//     for(fila=_mat.begin(); fila!=_mat.end(); fila++){
+//         sum=0;
+//         for(col=(*fila).second.begin(); col!=(*fila).second.end(); col++){
+//             sum += (*col).second * x[(*col).first];
+//         }
+//         y[(*fila).first]=sum;
+//     }
 
-    return y;
-}
+//     return y;
+// }
 
 void DOK::multiplicarConstante(double c)
 {
@@ -182,7 +182,7 @@ Vector DOK::resolverSistema()
             x[i] = x[i] - _mat[i][j]*x[j];
         }
         x[i] = x[i]/_mat[i][i];
-        std::cout << "\n x "<< i << " "<< x[i]<< std::endl;
+        // std::cout << "\n x "<< i << " "<< x[i]<< std::endl;
     }
     // int n = _n - 2;
     // Vector x(n-1,0);
@@ -250,7 +250,7 @@ void mostrarMatriz(DOK& dok)
     {
         for (int j = 0; j < vectorDeVectores[0].size(); j++)
         {
-            std::cout << vectorDeVectores[i][j] << "     ";
+            std::cout << vectorDeVectores[i][j] << "\t\t\t";
         }
         std::cout << "\n";
     }
@@ -268,10 +268,15 @@ DOK::DOK(DOK& m)
     for (int j = 0; j < _n; j++)
     {
         int cj = Cj(j,m);
+        // std::cout << "\n\n\n j:" << j << " " << cj << "\n\n";
         if(cj != 0)
         {
             _mat[j][j] = (1.0 / double(cj));
         }
+        // else
+        // {
+        //     _mat[j][j] = 1.0/double(_n);
+        // }
     }
 }
 

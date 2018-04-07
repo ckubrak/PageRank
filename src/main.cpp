@@ -14,7 +14,7 @@ int main (int argc, char** argv)
 
     DOK w(archivo);
 
-    // mostrarMatriz(w);
+    mostrarMatriz(w);
     DOK d(w);
 
     // mostrarMatriz(d);
@@ -23,15 +23,15 @@ int main (int argc, char** argv)
 // Hasta aca bien
     w = w.multiplicarMatriz(d);
 
-    // mostrarMatriz(w);
+    mostrarMatriz(w);
 
     w.multiplicarConstante(p);
 
-    // mostrarMatriz(w);
+    mostrarMatriz(w);
 
     identidad.restarMatrices(w);
 
-    // mostrarMatriz(identidad);
+    mostrarMatriz(identidad);
     // mostrarMatriz(identidad);
 // testeado hasta aqui: OK
 
@@ -42,18 +42,16 @@ int main (int argc, char** argv)
     std::chrono::steady_clock::time_point end= std::chrono::steady_clock::now();
     int timeElapsed = std::chrono::duration_cast<std::chrono::microseconds>(end - begin).count();
 
-    std::cout << timeElapsed;
+    std::cout << timeElapsed/1000000;
     normalizarVector(resultado);
 
-    double borrar = 0;
     for (int i =0; i< resultado.size();i++)
     {
         std::cout << std::endl;
         std::cout << resultado[i] << " ";
-        borrar += resultado[i];
     }
 
-    std::cout<< "\n" << borrar;
+
 
 
     return 0;
