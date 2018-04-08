@@ -7,16 +7,22 @@ DOK::DOK(size_t n)
 
 DOK::DOK(const char* input)
 {
+
     int from,to;
     std::ifstream infile(input);
     std::string line;
-
     infile >> _n;
     infile >> _m;
-std::cout << "lei: \n";
-std::cout << _n << _m;
+    std::cout << "lei: \n";
+    std::cout << _n << _m;
 
-    while(!infile.eof())
+    std::unordered_map<size_t , double> empty;
+    for (int i =0; i<_n;i++)
+    {
+        _mat[i] = empty;
+    }
+    for( std::string line; std::getline( infile, line ); )
+
     {
         infile >> from >> to;
         //std::cout << "desde: " << from << "\n";
@@ -41,15 +47,15 @@ DOK DOK::multiplicarMatriz(DOK &m)
 {
     DOK C(this->_n);
     for (size_t i=0; i < this->size(); ++i)
-        if(_mat.count(i) != 0)
+        // if(_mat.count(i) != 0)
             for (size_t j=0; j < this->size(); ++j)
             {
                 if(_mat[i].count(j))
                     for (size_t k=0; k < this->size(); ++k)
                     {
-                        if (m._mat.count(k) > 0 && m._mat[k].count(j) > 0)
+                        if (m._mat[k].count(j) > 0)
                         {
-                            if (C._mat.count(i) > 0 && C._mat[j].count(j) > 0)
+                            if (C._mat[j].count(j) > 0)
                                 C._mat[i][j] += this->_mat[i][k] * m._mat[k][j];
                             else
                                 C._mat[i][j] = this->_mat[i][k] * m._mat[k][j];
@@ -69,16 +75,16 @@ void DOK::sumarMatrices(DOK& m)
     {
         for (int j = 0; j < _n; j++)
         {
-            if (_mat.count(i) > 0 && _mat[i].count(j) > 0)
+            if (_mat[i].count(j) > 0)
             {
-                if(m._mat.count(i) > 0 && m._mat[i].count(j) > 0)
+                if(m._mat[i].count(j) > 0)
                 {
                     _mat[i][j] += m._mat[i][j];
                 }
             }
             else
             {
-                if(m._mat.count(i) > 0 && m._mat[i].count(j) > 0)
+                if( m._mat[i].count(j) > 0)
                 {
                     _mat[i][j] = m._mat[i][j];
                 }
@@ -113,7 +119,6 @@ void DOK::multiplicarConstante(double c)
 
     for (int i = 0; i <size(); i++)
     {
-        if (_mat.count(i) > 0)
             for (int j = 0; j < size(); j++)
             {
                 if (_mat[i].count(j) > 0){
@@ -149,7 +154,7 @@ Vector DOK::eliminacionGauss(Vector& b)
     {
         // controlar que el pivote no sea cero
         // por seguridad: la estructura de la matriz nos garantiza que no va a pasar
-        if (_mat.count(k) == 0 || _mat[k].count(k) == 0)
+        if (_mat[k].count(k) == 0)
         {
             // std::cout << "pivote cero \n\n";
             break;
@@ -162,30 +167,22 @@ Vector DOK::eliminacionGauss(Vector& b)
             //  std::cout << "elimin fila i: " << i << std::endl;
             // verificar que en la primera columna de la fila a eliminar no haya cero
             // si ya hubiera cero pasar a eliminar la siguiente fila
-            if (_mat.count(i) == 0 || _mat[i].count(k) == 0)
-            {
-                // break;
-            }
-            else
+            if (_mat[i].count(k) != 0)
             {
                 mult = _mat[i][k] / _mat[k][k]; //calcular multiplicador
 
                 for (int j = k ; j < _n;j++) //restar la fila a eliminar de la fila pivote
                 {
                     //que pasa si mat kj es cero? verificar
-                    if (_mat.count(k) == 0 || _mat[k].count(j) == 0) // controlar si hay un cero en esa columna de la fila pivote
-                    {
-                        //std::cout << " encontramos un cero en la columna j ... de la fila pivote k..." << j << " " << k << std::endl;
-                        matkj=0;
-                    }
-                    else
+                    if (_mat[k].count(j) != 0) // controlar si hay un cero en esa columna de la fila pivote
                     {
                         matkj=_mat[k][j];
                         // controlar si hay un cero en la posicion a eliminar
-                        if (_mat.count(i) == 0 || _mat[i].count(j) == 0)
+                        if (_mat[i].count(j) == 0)
                         {
                             //std::cout << " encontramos un cero en la columna j ... de la fila pivote k..." << j << " " << k << std::endl;
-                            matij=0;
+                            // matij=0;
+                            continue;
                         }
                         else
                         {
@@ -276,14 +273,12 @@ std::vector<Vector> DOK::matrizCompleta()
         res[i] = ceros;
     }
 
-    iter_fila fila;
-    iter_col col;
 
     for (int i = 0; i < _n; i++)
     {
         for (int j = 0; j < _n; j++)
         {
-            if (_mat.count(i) > 0 && _mat[i].count(j) > 0)
+            if (_mat[i].count(j) > 0)
                 res[i][j] += _mat[i][j];
         }
     }
@@ -325,7 +320,7 @@ int DOK::Cj(int j, DOK& m){
 	int Cj = 0;
 	for (int i = 0; i < _n; i++) //i son filas, j es la columna fija
 	{
-		if(m._mat.count(i) > 0 && m._mat[i].count(j) > 0)
+		if(m._mat[i].count(j) > 0)
       Cj += 1;
 	}
 	return Cj; //Cj son la cantidad de links salientes de la pagina j

@@ -65,11 +65,11 @@ std::cout << " I-pWD \n\n";
     normalizarVector(resultado);
     std::cout <<"vector normalizado: "<<std::endl;
     std::cout << timeElapsed/1000000;
-    for (int i =0; i< resultado.size();i++)
-    {
-        std::cout << std::endl;
-        std::cout << resultado[i] << " ";
-    }
+    // for (int i =0; i< resultado.size();i++)
+    // {
+    //     std::cout << std::endl;
+    //     std::cout << resultado[i] << " ";
+    // }
 
 
 
