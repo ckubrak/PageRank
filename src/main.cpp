@@ -46,30 +46,30 @@ std::cout << " I-pWD \n\n";
     Vector resultado = identidad.eliminacionGauss(sol);
 
     std::cout << " triangulada \n\n";
-    mostrarMatriz(identidad);
+    // mostrarMatriz(identidad);
 
     std::chrono::steady_clock::time_point end= std::chrono::steady_clock::now();
     int timeElapsed = std::chrono::duration_cast<std::chrono::microseconds>(end - begin).count();
 
     std::cout << timeElapsed/1000000 << std::endl;
 
-std::cout << "vector resultado sin normalizar: \n";
-std::cout << "resultado.size() :" << resultado.size() << std::endl;
-    for (int i =0; i< resultado.size();i++)
-    {
-        std::cout << i << " " << resultado[i] << std::endl;
-    }
+// std::cout << "vector resultado sin normalizar: \n";
+// std::cout << "resultado.size() :" << resultado.size() << std::endl;
+//     for (int i =0; i< resultado.size();i++)
+//     {
+//         std::cout << i << " " << resultado[i] << std::endl;
+//     }
 
 
 
     normalizarVector(resultado);
-std::cout <<"vector normalizado: ";
+    std::cout <<"vector normalizado: "<<std::endl;
+    std::cout << timeElapsed/1000000;
     for (int i =0; i< resultado.size();i++)
     {
         std::cout << std::endl;
         std::cout << resultado[i] << " ";
     }
-
 
 
 
@@ -79,12 +79,12 @@ std::cout <<"vector normalizado: ";
 void normalizarVector(Vector& v)
 {
     double total = 0;
-  std::cout << "\n\n\ntamaño vector " << v.size()<< std::endl;
+  // std::cout << "\n\n\ntamaño vector " << v.size()<< std::endl;
     for (int i = 0; i< v.size(); i++)
     {
-      std::cout << "i, v[i]: " << i << " " << v[i]<< "      ";
+      // std::cout << "i, v[i]: " << i << " " << v[i]<< "      ";
       total += v[i];
-      std::cout << "total: " << total << std::endl;
+      // std::cout << "total: " << total << std::endl;
     }
     for (int i = 0; i< v.size(); i++)
     {
