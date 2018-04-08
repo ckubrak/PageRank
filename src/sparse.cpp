@@ -10,12 +10,18 @@ DOK::DOK(const char* input)
     int from,to;
     std::ifstream infile(input);
     std::string line;
+
     infile >> _n;
     infile >> _m;
-    for( std::string line; std::getline( infile, line ); )
+std::cout << "lei: \n";
+std::cout << _n << _m;
+
+    while(!infile.eof())
     {
         infile >> from >> to;
-        _mat[from-1][to-1] = 1;
+        //std::cout << "desde: " << from << "\n";
+        //std::cout << "hasta: " << to << "\n";
+        _mat[to-1][from-1] = 1;
         _m++;
     }
 
@@ -121,47 +127,90 @@ void DOK::multiplicarConstante(double c)
 //TODO si sobra tiempo ver si puedo hacerlo con iteradores
 Vector DOK::eliminacionGauss(Vector& b)
 {
-    double mult;
+    double mult, matij, matkj;
+    size_t n; //cantidad total de filas de la matriz
 
-    // Agrego a b en la ultima columna
+    // Se agrega a b en la ultima columna
+    // esto aumenta en 1 la dimension de toda la matriz pero en realidad sigue
+    // habiendo una fila menos
+    n=_n;
     _n++;
-    for (int i=0; i < b.size(); i++)
+std::cout << "EG filas: " << n << " \n";
+    for (int i=0; i < n; i++) //agregar b en la ultima columna
     {
-        if (b[i] != 0)
+  //    std::cout << fabs(b[i]) << std::endl;
+        if (fabs(b[i]) > 0.000000000001)
         {
             _mat[i][b.size()] = b[i];
         }
     }
-
-    for (int k = 0; k < b.size() ; k++)
+std::cout << "EG. Ya se armo b \n";
+    for (int k = 0; k < n-1 ; k++) //filas pivote
     {
-        for (int i = k+1 ; i < _n ; i++)
+      // controlar que el pivote no sea cero
+      // por seguridad: la estructura de la matriz nos garantiza que no va a pasar
+      if (_mat.count(k) == 0 || _mat[k].count(k) == 0)
+          {
+            std::cout << "pivote cero \n\n";
+            //break;
+          }
+
+        std::cout << "fila pivote k: " << k << std::endl;
+
+        for (int i = k+1 ; i < n ; i++) //filas a eliminar
         {
+        //  std::cout << "elimin fila i: " << i << std::endl;
+            // verificar que en la primera columna de la fila a eliminar no haya cero
+            // si ya hubiera cero pasar a eliminar la siguiente fila
             if (_mat.count(i) == 0 || _mat[i].count(k) == 0)
                 {
-                    break;
+                    //break;
                 }
             else
             {
-               mult = _mat[i][k] / _mat[k][k];
+               mult = _mat[i][k] / _mat[k][k]; //calcular multiplicador
 
-            }
-            for (int j = k ; j < _n;j++)
-            {
-                double ij = _mat[i][j] - mult * _mat[k][j];
-                //TODO cambiar por epsilon
-                if (std::fabs(ij) < 0.0001)
+                for (int j = k ; j < _n;j++) //restar la fila a eliminar de la fila pivote
                 {
-                    _mat[i].erase(j);
-                }
-                else
-                {
-                    _mat[i][j] = ij;
-                }
-            }
+                    //que pasa si mat kj es cero? verificar
+                    if (_mat.count(k) == 0 || _mat[k].count(j) == 0) // controlar si hay un cero en esa columna de la fila pivote
+                    {
+                      //std::cout << " encontramos un cero en la columna j ... de la fila pivote k..." << j << " " << k << std::endl;
+                      matkj=0;
+                    }
+                    else
+                    {
+                      matkj=_mat[k][j];
+                    }
+                    // controlar si hay un cero en la posicion a eliminar
+                    if (_mat.count(i) == 0 || _mat[i].count(j) == 0)
+                    {
+                      //std::cout << " encontramos un cero en la columna j ... de la fila pivote k..." << j << " " << k << std::endl;
+                      matij=0;
+                    }
+                    else
+                    {
+                      matij=_mat[i][j];
+                    }
 
-        }
-    }
+                    //double ij = _mat[i][j] - mult * _mat[k][j];
+                    double ij = matij - mult * matkj;
+                    //TODO cambiar por epsilon
+                    if (fabs(ij) < 0.00000001) //chequear si la posicion se hace cero despues de la resta
+                    {
+
+                        _mat[i].erase(j);
+                    }
+                    else
+                    {
+                        _mat[i][j] = ij;
+                    }
+                } //fin eliminar fila i
+            } //fin no hay cero en la primera columna de la fila i
+        } // fin filas a eliminar
+    } // fin filas pivote
+std::cout << "terminamos de triangular " << std::endl;
+mostrarMatriz(*this);
 
     return resolverSistema();
 }
@@ -250,33 +299,25 @@ void mostrarMatriz(DOK& dok)
     {
         for (int j = 0; j < vectorDeVectores[0].size(); j++)
         {
-            std::cout << vectorDeVectores[i][j] << "\t\t\t";
+            std::cout << vectorDeVectores[i][j] << "\t";
         }
         std::cout << "\n";
     }
     std::cout << "\n";
 }
 
-//Esta funcion es para armar la matriz diagonal D, la de "balance"
-//TODO testear estas dos
+//Armar la matriz diagonal D, "balance"
 DOK::DOK(DOK& m)
 {
-  // std::cout << "dentro de DOK(m): " << std::endl;
-  // mostrarMatriz(m);
-  // std::cout << m._n << std::endl;
     _n = m._n;
     for (int j = 0; j < _n; j++)
     {
         int cj = Cj(j,m);
-        // std::cout << "\n\n\n j:" << j << " " << cj << "\n\n";
+
         if(cj != 0)
         {
             _mat[j][j] = (1.0 / double(cj));
         }
-        // else
-        // {
-        //     _mat[j][j] = 1.0/double(_n);
-        // }
     }
 }
 
@@ -285,10 +326,7 @@ int DOK::Cj(int j, DOK& m){
 	for (int i = 0; i < _n; i++) //i son filas, j es la columna fija
 	{
 		if(m._mat.count(i) > 0 && m._mat[i].count(j) > 0)
-		{
-			//Cj += m._mat[i][j];
       Cj += 1;
-		}
 	}
 	return Cj; //Cj son la cantidad de links salientes de la pagina j
 }

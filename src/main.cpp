@@ -12,9 +12,12 @@ int main (int argc, char** argv)
     std::ifstream input(archivo);
     std::ofstream output("archivo.out");
 
+std::cout << "llama constructor : \n";
     DOK w(archivo);
 
-    mostrarMatriz(w);
+
+std::cout << " W \n\n";
+    //mostrarMatriz(w);
     DOK d(w);
 
     // mostrarMatriz(d);
@@ -23,28 +26,44 @@ int main (int argc, char** argv)
 // Hasta aca bien
     w = w.multiplicarMatriz(d);
 
-    mostrarMatriz(w);
+std::cout << " WD \n\n";
+    //mostrarMatriz(w);
 
     w.multiplicarConstante(p);
 
-    mostrarMatriz(w);
+std::cout << " pWD \n\n";
+    //mostrarMatriz(w);
 
     identidad.restarMatrices(w);
-
-    mostrarMatriz(identidad);
+std::cout << " I-pWD \n\n";
+//    mostrarMatriz(identidad);
     // mostrarMatriz(identidad);
 // testeado hasta aqui: OK
+
 
    Vector sol(w.size(),1);
 
     Vector resultado = identidad.eliminacionGauss(sol);
+
+    std::cout << " triangulada \n\n";
     mostrarMatriz(identidad);
+
     std::chrono::steady_clock::time_point end= std::chrono::steady_clock::now();
     int timeElapsed = std::chrono::duration_cast<std::chrono::microseconds>(end - begin).count();
 
-    std::cout << timeElapsed/1000000;
-    normalizarVector(resultado);
+    std::cout << timeElapsed/1000000 << std::endl;
 
+std::cout << "vector resultado sin normalizar: \n";
+std::cout << "resultado.size() :" << resultado.size() << std::endl;
+    for (int i =0; i< resultado.size();i++)
+    {
+        std::cout << i << " " << resultado[i] << std::endl;
+    }
+
+
+
+    normalizarVector(resultado);
+std::cout <<"vector normalizado: ";
     for (int i =0; i< resultado.size();i++)
     {
         std::cout << std::endl;
@@ -60,9 +79,12 @@ int main (int argc, char** argv)
 void normalizarVector(Vector& v)
 {
     double total = 0;
+  std::cout << "\n\n\ntamaño vector " << v.size()<< std::endl;
     for (int i = 0; i< v.size(); i++)
     {
-        total += v[i];
+      std::cout << "i, v[i]: " << i << " " << v[i]<< "      ";
+      total += v[i];
+      std::cout << "total: " << total << std::endl;
     }
     for (int i = 0; i< v.size(); i++)
     {
