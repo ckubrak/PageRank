@@ -1,9 +1,9 @@
-\documentclass[a4paper]{article}
+%\documentclass[a4paper]{article}
+\documentclass[10pt,a4paper]{article}
+\usepackage[utf8]{inputenc} % para poder usar tildes en archivos UTF-8
+\usepackage[spanish]{babel}
 %\usepackage{a4wide} % márgenes un poco más anchos que lo usual
 
-
-\usepackage[spanish]{babel} % Le indicamos a LaTeX que vamos a escribir en español.
-\usepackage[utf8]{inputenc} % Permite utilizar tildes y eñes normalmente
 \usepackage{caratula} % Se puede descargar en ~> https://github.com/bcardiff/dc-tex
 \usepackage[breaklinks=true]{hyperref}
 
@@ -17,10 +17,10 @@
 \titulo{Trabajo Práctico 1 - Page Rank} 
 \fecha{\today}
 \materia{Métodos Numéricos}
-\grupo{Grupo (número de grupo)}
+\grupo{Grupo "Nombre Del Grupo"}
 
 % Completar los integrantes del grupo:)
-\integrante{Facundo, Araujo}{321/15}{facalj_velez@hotmail.com}
+\integrante{Facundo, Araujo}{321/15}{facalj\_velez@hotmail.com}
 \integrante{Cristian, Kubrak}{456/15}{Kubrakcristian@gmail.com}
 \integrante{Marcela Alejandra, Herrera}{1162/84}{marcelaalejandraherrera@yahoo.com.ar}
 \integrante{Luis Fernando, Greco}{150/15}{luifergreco@gmail.com}
@@ -34,33 +34,35 @@
 \newpage
 
 \section{Introducción}
-\input{introduccion.tex}
+\input{introduccion}
+\newpage
 
 \section{Demostraciones}
-\input{demostraciones.tex}
+\input{demostraciones}
+\newpage
+
+\section{Desarrollo}
+\input{desarrollo}
+\newpage
 
 \section{Resultados}
-\input{resultados.tex}
+\input{resultados}
+\newpage
 
 \section{Discusión}
-\input{discusion.tex}
+\input{discusion}
+\newpage
 
 \section{Conclusiones}
-\input{conclusiones.tex}
+\input{conclusiones}
+\newpage
 
 \section{Apendices}
-\input{apendices.tex}
+\input{apendices}
+\newpage
 
 \section{Referencias}
-\input{referencias.tex}
-
-% \input{introduccion.tex}
-% \input{demostraciones.tex}
-% \input{resultados.tex}
-% \input{discucion.tex}
-% \input{conclusiones.tex}
-% \input{apendices.tex}
-% \input{referencias.tex}
- 
+\input{referencias}
 
 \end{document}
+

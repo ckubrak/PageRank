@@ -7,7 +7,6 @@ void escribir(Vector& v, double p, char* archivo );
 
 int main (int argc, char** argv)
 {
-    std::chrono::steady_clock::time_point begin = std::chrono::steady_clock::now();
     char* archivo = argv[1];
     std::string out = argv[1];
     //TODO cambiar a .out a la hora de entregar
@@ -20,7 +19,8 @@ int main (int argc, char** argv)
     DOK w(archivo);
     DOK d(w);
     DOK identidad(d.size(),1);
-
+    //Empezamos a contar acá por que no nos interesa contar la lectura
+    std::chrono::steady_clock::time_point begin = std::chrono::steady_clock::now();
     w = w.multiplicarMatriz(d);
     w.multiplicarConstante(p);
 
@@ -43,7 +43,7 @@ int main (int argc, char** argv)
         std::cout << resultado[i] << "\n";
     }
     //output.close();
-
+    std::cout << timeElapsed/1000000 << std::endl;
     return 0;
 }
 
