@@ -162,25 +162,18 @@ Vector DOK::eliminacionGauss(Vector& b)
             if (_mat[i].count(k) != 0)
             {
                 mult = _mat[i][k] / _mat[k][k]; //calcular multiplicador
-                // if (!(fabs(mult) < eps))
-                {
 
                     for (iter_col col = _mat[k].begin(); col != _mat[k].end(); col++)
                     {
                         int j = (*col).first;
                         if (j < k)
                             continue;
-                        // std::cout << "\n" << j << std::endl;
-                        //que pasa si mat kj es cero? verificar
-                        if (_mat[k].count(j) != 0) // controlar si hay un cero en esa columna de la fila pivote
+                        if (_mat[k].count(j) != 0)
                         {
                             matkj=_mat[k][j];
-                            // controlar si hay un cero en la posicion a eliminar
                             if (_mat[i].count(j) == 0)
                             {
-                                //std::cout << " encontramos un cero en la columna j ... de la fila pivote k..." << j << " " << k << std::endl;
                                 matij=0;
-                                // continue;
                             }
                             else
                             {
@@ -188,8 +181,7 @@ Vector DOK::eliminacionGauss(Vector& b)
                             }
 
                             double ij = matij - mult * matkj;
-                            //TODO cambiar por epsilon
-                            if (fabs(ij) < eps) //chequear si la posicion se hace cero despues de la resta
+                            if (fabs(ij) < eps)
                             {
 
                                 _mat[i].erase(j);
@@ -200,7 +192,6 @@ Vector DOK::eliminacionGauss(Vector& b)
                             }
                         }
                     }
-                }
             } //fin no hay cero en la primera columna de la fila i
         } // fin filas a eliminar
     } // fin filas pivote

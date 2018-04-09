@@ -33,8 +33,9 @@ for m in range(saltos,mFinal,saltos):
     elapsed = time.time() - start_time
     os.remove(archivo)
     os.remove(archivo + ".outi")
-    rales = 1- (m / (n**2))
-    res.append((elapsed,rales))
+
+    sparsity = 1-( m / (n**2))
+    res.append((elapsed,sparsity))
 
 plt.scatter(*zip(*res))
 plt.xlabel('x')
