@@ -16,11 +16,6 @@ DOK::DOK(const char* input)
     std::cout << "lei: \n";
     std::cout << _n << _m;
 
-    std::unordered_map<size_t , double> empty;
-    for (int i =0; i<_n;i++)
-    {
-        _mat[i] = empty;
-    }
     for( std::string line; std::getline( infile, line ); )
 
     {
@@ -134,6 +129,7 @@ Vector DOK::eliminacionGauss(Vector& b)
 {
     double mult, matij, matkj;
     size_t n; //cantidad total de filas de la matriz
+    double eps = 0.001;
 
     // Se agrega a b en la ultima columna
     // esto aumenta en 1 la dimension de toda la matriz pero en realidad sigue
@@ -144,7 +140,7 @@ Vector DOK::eliminacionGauss(Vector& b)
     for (int i=0; i < n; i++) //agregar b en la ultima columna
     {
         //    std::cout << fabs(b[i]) << std::endl;
-        if (fabs(b[i]) > 0.000000000001)
+        if (fabs(b[i]) > eps)
         {
             _mat[i][b.size()] = b[i];
         }
@@ -154,13 +150,9 @@ Vector DOK::eliminacionGauss(Vector& b)
     {
         // controlar que el pivote no sea cero
         // por seguridad: la estructura de la matriz nos garantiza que no va a pasar
-        if (_mat[k].count(k) == 0)
-        {
-            // std::cout << "pivote cero \n\n";
-            break;
-        }
 
-        // std::cout << "fila pivote k: " << k << std::endl;
+        if (k%100 == 0)
+            std::cout << "fila pivote k: " << k << std::endl;
 
         for (int i = k+1 ; i < n ; i++) //filas a eliminar
         {
@@ -170,39 +162,45 @@ Vector DOK::eliminacionGauss(Vector& b)
             if (_mat[i].count(k) != 0)
             {
                 mult = _mat[i][k] / _mat[k][k]; //calcular multiplicador
-
-                for (int j = k ; j < _n;j++) //restar la fila a eliminar de la fila pivote
+                // if (!(fabs(mult) < eps))
                 {
-                    //que pasa si mat kj es cero? verificar
-                    if (_mat[k].count(j) != 0) // controlar si hay un cero en esa columna de la fila pivote
+
+                    for (iter_col col = _mat[k].begin(); col != _mat[k].end(); col++)
                     {
-                        matkj=_mat[k][j];
-                        // controlar si hay un cero en la posicion a eliminar
-                        if (_mat[i].count(j) == 0)
-                        {
-                            //std::cout << " encontramos un cero en la columna j ... de la fila pivote k..." << j << " " << k << std::endl;
-                            // matij=0;
+                        int j = (*col).first;
+                        if (j < k)
                             continue;
-                        }
-                        else
+                        // std::cout << "\n" << j << std::endl;
+                        //que pasa si mat kj es cero? verificar
+                        if (_mat[k].count(j) != 0) // controlar si hay un cero en esa columna de la fila pivote
                         {
-                            matij=_mat[i][j];
-                        }
+                            matkj=_mat[k][j];
+                            // controlar si hay un cero en la posicion a eliminar
+                            if (_mat[i].count(j) == 0)
+                            {
+                                //std::cout << " encontramos un cero en la columna j ... de la fila pivote k..." << j << " " << k << std::endl;
+                                matij=0;
+                                // continue;
+                            }
+                            else
+                            {
+                                matij=_mat[i][j];
+                            }
 
-                        //double ij = _mat[i][j] - mult * _mat[k][j];
-                        double ij = matij - mult * matkj;
-                        //TODO cambiar por epsilon
-                        if (fabs(ij) < 0.00000001) //chequear si la posicion se hace cero despues de la resta
-                        {
+                            double ij = matij - mult * matkj;
+                            //TODO cambiar por epsilon
+                            if (fabs(ij) < eps) //chequear si la posicion se hace cero despues de la resta
+                            {
 
-                            _mat[i].erase(j);
-                        }
-                        else
-                        {
-                            _mat[i][j] = ij;
+                                _mat[i].erase(j);
+                            }
+                            else
+                            {
+                                _mat[i][j] = ij;
+                            }
                         }
                     }
-                } //fin eliminar fila i
+                }
             } //fin no hay cero en la primera columna de la fila i
         } // fin filas a eliminar
     } // fin filas pivote

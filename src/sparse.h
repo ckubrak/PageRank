@@ -17,7 +17,7 @@ typedef std::vector<double > Vector;
 class DOK
 {
 public:
-    typedef std::map<size_t, std::unordered_map<size_t , double> > matriz;
+    typedef std::map<size_t, std::map<size_t , double> > matriz;
     typedef matriz::iterator iter_fila;
 
     typedef std::map<size_t, double> columnas;

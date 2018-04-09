@@ -36,13 +36,13 @@ int main (int argc, char** argv)
 
     normalizarVector(resultado);
 
-    std::ofstream output(out);
-    output << p <<"\n";
+    //std::ofstream output(out);
+    //output << p <<"\n";
     for (int i =0; i< resultado.size();i++)
     {
-        output << resultado[i] << "\n";
+        std::cout << resultado[i] << "\n";
     }
-    output.close();
+    //output.close();
 
     return 0;
 }
