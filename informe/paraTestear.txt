@@ -1,0 +1,12 @@
+Test a hacer: 
+	Medir error en funcion del tiempo
+	Tiempo de ejecucion en funcion de que tan rala es la matriz.
+	Vamos a usar como parametro sparsity = (n^2 - m)/(n^2)
+
+	Condiciones: Sin reflexividad, sin repetidos.
+
+	n = 2000, 1000, 500, 100.
+	sparsity = 0,25; 0,50; 0,75; ((n^2)-n)/(n^2)
+	
+	Probar a ver que pasa con distintas probabilidades. 0.25, 0.50, 0.70, 0.75, 0.8, 0.9, 0.95.
+	Puede ser que las probabilidades que traen los tests de la catedra sean mayores a 0.50 por algo? Qué pasa si no?
