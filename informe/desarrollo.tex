@@ -35,13 +35,9 @@ no resulta f\'acil iterar eficientemete por lo que terminamos decidi\'endonos po
             \End
         \End
 \end{codebox}
-
-Explicar EG, resolucion de sistema y cmo funcina nuestra estrutura.
-\par EXPLICAR FUNCIONES BASICAS, MULTIPLICACION, SUMA DE MATRICES.
-
-\par Luego, para implementar la Eliminación Gausseana lo llevamos a cabo siguiendo el método explicado en clase, con operaciónes de suma y multiplicación entre filas pero sin pivoteo entre las mismas.
-EXPLICACION MAS DETALLADA DE EG
-
-\par ACA EXPLICAR RESOLUCION DE SISTEMA 
-
-\par 
+\par Como la matriz que utlizamos para almacenar la informci\'on es rala, no todos los elementos se encuentran definidos, por lo que 
+adem\'as hay que asegurarse que los elementos est\'en definidos antes de operar con ellos. M\'as a\'un, dado que la resoluci\'on
+del sistema no es m\'as que una aproximaci\'on, es necesario definir un $\varepsilon > 0$ para determinar qu\'e tan bien queremos que 
+aproxime a la soluci\'on real; si bien un $\varepsilon$ m\'as chico producir\'ia una mejor aproximaci\'on, tambi\'en ralentiza la
+ejecuci\'on del algoritmo. Es por esto, que junto con la esparsidad ($\delta = 1 - \frac{m}{n^2}$), decidimos hacer un an\'alisis
+sobre el taman\~no del $\varepsilon$.
