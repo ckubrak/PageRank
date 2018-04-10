@@ -1,10 +1,29 @@
 \subsubsection*{Desarrollo}
+
+\par Las relaciones entre p\'aginas forman un grafo y resulta conveniente almacenarlos como una
+matriz de uno y ceros, done el un uno en la poscici\'on $ij$ representa que la p\'agina $j$ apunta a la $i$.
+A\'un as\'i esta implementaci\'ion tiene un problema: debe almacenar $n^2$ elementos, donde solo importan
+$m$ (la cantidad de unos). En la pr\'actica, $m \ll n^2$ (ya que no todas las p\'aginas se relacionan
+con todos). Es por esto que decidimos utilizar matrices \textit{ralas}: un tipo de matriz donde solo
+importa donde hay unos, es decir, qu\'e p\'agina apunta a cu\'al.
+
+\par Como primer acercamiento, evaluamos utilizar dos conocidos conocidos m\'etodos para el almacenamiento
+de matrices ralas: CSR (Compressed Sparse Row) y CSC (Compressed Sparse Column). En el primer caso
+nos encotramos con el problema de la dificultad de acceder a las colmunas, mientras que en el segundo,
+las filas. consideramos de vital importancia poder acceder tanto a filas como columnas en un tiempo
+razonable para operaciones tales como la multiplicación o la Eliminación Gausseana.
+
+\par Luego de evaluar los requerimientos, tanto de complejidad como de espacio utilizado, optamos
+por implementar una estructura h\'ibrida entre un DOK (Dictionary Of Keys) y una lista de listas. 
+Utilizamos una estructura que consiste en un diccionario de diccionarios: en el primero almacenamos
+todas las filas y en el segundo sus elementos.\\
+\par Respecto a la implementaci\'on, nos encontramos frente a la decisión de utilizar un diccionario ordenado
+implementado sobre una estructura autobalanceada (\verb|std::map|) o un diccionario desordenado
+implementado sobre una tabla de hash (\verb|std::unordered_map|). Si bien este \'ulitmo permite
+el acceso en $O(1)$ en promedio frente al acceso en $O(\log n)$ del diccionario ordenado, 
+no resulta f\'acil iterar eficientemete por lo que terminamos decidi\'endonos por la versi\'on autobalanceada.\\
+
 Explicar EG, resolucion de sistema y cmo funcina nuestra estrutura.
-
-\par En primer lugar comenzamos planteando nuestra estructura como un diccionario DOK (Dictionary of Keys) -explicado en la diapositiva en clase- debido a una relativa facilidad a la hora de implementarla, sin embargo correr los primeros tests (los de la cátedra) nos encontramos con que esta implementación no cumplía nuestras expectativas en cuanto al tiempo de ejecución.
-
-\par Al comenzar nuestra estructura fue un map, luego lo cambiamos por un unordered map en nuestra busqueda por bajar los tiempos de ejecución. Y finalmente terminamos volviendo a utilizar un map, solo que esta vez con iteradores, y fue con esta estructura que logramos correr el tp en tiempos que consideramos razonables.
-
 \par EXPLICAR FUNCIONES BASICAS, MULTIPLICACION, SUMA DE MATRICES.
 
 \par Luego, para implementar la Eliminación Gausseana lo llevamos a cabo siguiendo el método explicado en clase, con operaciónes de suma y multiplicación entre filas pero sin pivoteo entre las mismas.
