@@ -1,15 +1,73 @@
+\subsubsection*{Modelado del problema}
+Para modelar la implementiaci\'on, utilizamos el \textit{modelo de navegante aleatorio}\cite{navegante}.
+Dado una probabildad $p$ buscamos resolver el sistema:
+
+\begin{equation}\label{eq:Axx}
+    Ax = x
+\end{equation}
+donde 
+
+\begin{equation}
+ A = a_{ij} = \left\{
+    \begin{array}{ll}
+	 (1-p)/n + (p w_{i})/c & \mathrm{si\ } c_j\not=0\\
+	 1/n & \mathrm{si\ } c_j=0
+	 \end{array}
+   \right.
+\end{equation}
+
+Como se puede ver en (citar demo), la matriz $A$ puede rescribirse como
+
+\begin{equation}
+    A = p WD + ez^{t}
+\end{equation}
+donde
+
+\[
+ D = d_{ij} = \left\{
+    \begin{array}{ll}
+	 1/c_{ij} & \mathrm{si\ } c_j\not=0\\
+	 0 & \mathrm{si\ } c_j=0
+	 \end{array}
+   \right.
+\]   
+$e$ es un vector columna de dimension n y $z$ es un vector columna cuyos componentes son:
+\[   
+  z_{j} = \left\{
+    \begin{array}{ll}
+	 (1-p)/n & \mathrm{si\ } c_j\not=0\\
+	 1/n & \mathrm{si\ } c_j=0
+	 \end{array}
+   \right.
+\]  
+De esta manera, la equaci\'on \ref{eq:Axx} se puede rescribir como
+
+\begin{equation}\label{ipwd}
+    (I - pWD)x = \gamma e^t 
+\end{equation}
+donde $\gamma = z^tx$ es el factor de escala. Para el an\'alisis de este m\'etodo supusimos
+$\gamma = 1$
+
+
 \subsubsection*{Introducción Teórica}
 
-\par El problema que se nos plantea es el de implementar un Page Rank, es decir, un método para ordernar páginas de acceso público de forma sistematizada y eficiente. 
-Para esto tendremos que definir qu\'e parametros vamos a tener en cuenta al momento de armar nuestro orden de páginas.
-Estos van a ser la cantidad de links \textit{entrantes}" a una página y la \textit{calidad}" de cada uno de estos, es decir, qu\'e tan relevante es la página de la que proviene ese link.\newline
+\par El problema que se nos plantea es el de implementar un Page Rank, es decir, 
+un método para ordernar páginas de acceso público de forma sistematizada y eficiente. 
+Para esto tendremos que definir qu\'e parametros vamos a tener en cuenta al momento de 
+armar nuestro orden de páginas. Estos van a ser la cantidad de links \textit{entrantes} 
+a una página y la \textit{calidad} de cada uno de estos, es decir, qu\'e tan relevante 
+es la página de la que proviene ese link.\newline
 
 % \par Encontramos que este problema tiene una gran aplicación, dado que es fundamental para construir un motor de búsqueda y nos permitirá entender mejor como funcionan.\newline
 
 \par HABLAR ALGO SOBRE CADENAS DE MARKOV
 
-\par Dado el volmunen de paginas que existen actualmente en Internet, resulta de vital importancia optimizar de alguna manera tanto la forma de almacenar
-como la forma de procesar la informaci\'on. Para lograr dicha optimizaci\'on decidimos utlizar matrices ralas (donde muchos de sus elementos son ceros)
-\par Para empezar a trabajar con matrices ralas nos vimos en la necesidad de buscar un método implementar este tipo de estructura,
-teniendo en cuenta un uso eficiente de los recursos del sistema (intentando sacar provecho del conocimiento que tenemos de entrada sobre las matrices). 
-Es en este contexto que decidimos utilizar un h\'ibrido entre el formato LL (List of Lists) y DOK (Dictionary of Keys).\newline
+\par Dado el volmunen de paginas que existen actualmente en Internet, resulta de vital importancia 
+optimizar de alguna manera tanto la forma de almacenar
+como la forma de procesar la informaci\'on. Para lograr dicha optimizaci\'on decidimos utlizar matrices ralas
+ (d\'onde muchos de sus elementos son ceros)
+\par Para empezar a trabajar con matrices ralas nos vimos en la necesidad de buscar un método implementar
+ este tipo de estructura, teniendo en cuenta un uso eficiente de los recursos del sistema 
+ (intentando sacar provecho del conocimiento que tenemos de entrada sobre las matrices). 
+Es en este contexto que decidimos utilizar un h\'ibrido entre el formato LL (List of Lists) y 
+DOK (Dictionary of Keys).\newline
