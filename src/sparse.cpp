@@ -120,10 +120,6 @@ Vector DOK::eliminacionGauss(Vector& b, double eps)
     {
         // controlar que el pivote no sea cero
         // por seguridad: la estructura de la matriz nos garantiza que no va a pasar
-        if (k%100 == 0)
-        {
-            std::cout << k<<"\n";
-        }
 
         for (int i = k+1 ; i < n ; i++) //filas a eliminar
         {
