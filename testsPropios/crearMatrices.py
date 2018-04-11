@@ -1,10 +1,9 @@
 from random import randint
-import spam
 import sys
 import os
 import subprocess
 import time
-import matplotlib.pyplot as plt
+#import matplotlib.pyplot as plt
 
 def crearMatriz(n,m):
     file = open("tests/test_" + str(n) + "_" + str(m) + ".txt"  ,"w")
@@ -27,12 +26,12 @@ proba = sys.argv[4]
 
 res = []
 
-archivoRes = open("resultados.txt", "w") 
+archivoRes = open("resultados/resultados"+str(n)+"_"+str(mFinal)+"_"+str(proba)+ "_.txt", "w") 
 for m in range(saltos,mFinal,saltos):
     crearMatriz(n,m)
     archivo = os.path.join("tests/", "test_" + str(n) + "_" + str(m) + ".txt")
     tiempos = []
-    for x in range (1,10):
+    for x in range (1,30):
         start_time = time.time()    
         subprocess.call(["./../build/tp", archivo, proba])
         elapsed = time.time() - start_time
