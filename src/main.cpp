@@ -47,7 +47,7 @@ int main (int argc, char** argv)
 
     normalizarVector(resultado);
 
-    std::cout << (double)timeElapsed/1000000 << std::endl;
+    // std::cout << (double)timeElapsed/1000000 << std::endl;
 
     std::ofstream output(out);
     output << p <<"\n";
