@@ -18,8 +18,6 @@ DOK::DOK(const char* input)
 
     {
         infile >> from >> to;
-        //std::cout << "desde: " << from << "\n";
-        //std::cout << "hasta: " << to << "\n";
         _mat[to-1][from-1] = 1;
         _m++;
     }
@@ -40,7 +38,6 @@ DOK DOK::multiplicarMatriz(DOK &m)
 {
     DOK C(this->_n);
     for (size_t i=0; i < this->size(); ++i)
-        // if(_mat.count(i) != 0)
             for (size_t j=0; j < this->size(); ++j)
             {
                 if(_mat[i].count(j))
@@ -87,26 +84,6 @@ void DOK::sumarMatrices(DOK& m)
 }
 
 
-// Vector DOK::operator*(const Vector& x)
-// {
-
-//     Vector y(_n);
-//     double sum;
-
-//     iter_fila fila;
-//     iter_col col;
-
-//     for(fila=_mat.begin(); fila!=_mat.end(); fila++){
-//         sum=0;
-//         for(col=(*fila).second.begin(); col!=(*fila).second.end(); col++){
-//             sum += (*col).second * x[(*col).first];
-//         }
-//         y[(*fila).first]=sum;
-//     }
-
-//     return y;
-// }
-
 void DOK::multiplicarConstante(double c)
 {
 
@@ -122,7 +99,6 @@ void DOK::multiplicarConstante(double c)
     }
 }
 
-//TODO si sobra tiempo ver si puedo hacerlo con iteradores
 Vector DOK::eliminacionGauss(Vector& b, double eps)
 {
     double mult, matij, matkj;
@@ -189,56 +165,25 @@ Vector DOK::eliminacionGauss(Vector& b, double eps)
             } //fin no hay cero en la primera columna de la fila i
         } // fin filas a eliminar
     } // fin filas pivote
-// mostrarMatriz(*this);
 
     return resolverSistema();
 }
 
 Vector DOK::resolverSistema()
 {
-    // TODO discutir esto (Si no le agrego 1 a _n no lo podria printear pero no es necesario para la entrega)
 
     int n = n-2;
     Vector x(_n-1,0.0);
     for (int i = _n-2; i >= 0; i--)
     {
         x[i] = _mat[i][_n-1];
-        // std::cout << "\n xi: "<< x[i]<< std::endl;
 
         for(int j = i+1; j <= _n-2; j++)
         {
             x[i] = x[i] - _mat[i][j]*x[j];
         }
         x[i] = x[i]/_mat[i][i];
-        // std::cout << "\n x "<< i << " "<< x[i]<< std::endl;
     }
-    // int n = _n - 2;
-    // Vector x(n-1,0);
-
-    // x[n] = _mat[n-1][n] / _mat[n][n];
-    // int n = _n - 1;
-
-    // Vector x(n,0);
-    // for (int i = 1; i >= 1; i++)
-    // {
-    //     x[i] = _mat[i][_n-1];
-    //     // std ::cout <<x[i];
-    // }
-    // x[n] = _mat[n][n+1] / _mat[n][n];
-    // std::cout << x[n-1] << "\n\n\n";
-    // for (int i = n-1; i >= 1 ; i-- )
-    // {
-    //     double sum = 0;
-    //     for (int j = i + 1; j <= n; j++)
-    //     {
-    //             sum += _mat[i][j]*x[j];
-    //     }
-    //     x[i]=(_mat[i][n+1]-sum)/_mat[i][i];
-    //     std::cout << "n: " << n << std::endl;
-    //     std::cout << "i: " << i << std::endl;
-    //     std::cout << "_mat[i][n]: " << _mat[i][n]<< std::endl;
-    //     std::cout << x[i] << std::endl;
-    // }
     return x;
 }
 

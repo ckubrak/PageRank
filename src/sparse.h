@@ -35,7 +35,6 @@ public:
 
     void multiplicarConstante(double c);
     DOK multiplicarMatriz(DOK& m);
-    // DOK& operator*(const double c);
 
     double& operator()(size_t i, size_t j)
     {
