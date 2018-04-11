@@ -30,7 +30,7 @@ public:
 
     void sumarMatrices(DOK& m);
     void restarMatrices(DOK& m);
-    Vector eliminacionGauss (Vector& b);
+    Vector eliminacionGauss (Vector& b, double eps);
     Vector operator*(const Vector& x);
 
     void multiplicarConstante(double c);

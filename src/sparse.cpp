@@ -13,8 +13,6 @@ DOK::DOK(const char* input)
     std::string line;
     infile >> _n;
     infile >> _m;
-    std::cout << "lei: \n";
-    std::cout << _n << _m;
 
     for( std::string line; std::getline( infile, line ); )
 
@@ -125,38 +123,34 @@ void DOK::multiplicarConstante(double c)
 }
 
 //TODO si sobra tiempo ver si puedo hacerlo con iteradores
-Vector DOK::eliminacionGauss(Vector& b)
+Vector DOK::eliminacionGauss(Vector& b, double eps)
 {
     double mult, matij, matkj;
     size_t n; //cantidad total de filas de la matriz
-    double eps = 0.001;
 
     // Se agrega a b en la ultima columna
     // esto aumenta en 1 la dimension de toda la matriz pero en realidad sigue
     // habiendo una fila menos
     n=_n;
     _n++;
-// std::cout << "EG filas: " << n << " \n";
     for (int i=0; i < n; i++) //agregar b en la ultima columna
     {
-        //    std::cout << fabs(b[i]) << std::endl;
         if (fabs(b[i]) > eps)
         {
             _mat[i][b.size()] = b[i];
         }
     }
-// std::cout << "EG. Ya se armo b \n";
     for (int k = 0; k < n-1 ; k++) //filas pivote
     {
         // controlar que el pivote no sea cero
         // por seguridad: la estructura de la matriz nos garantiza que no va a pasar
-
         if (k%100 == 0)
-            std::cout << "fila pivote k: " << k << std::endl;
+        {
+            std::cout << k<<"\n";
+        }
 
         for (int i = k+1 ; i < n ; i++) //filas a eliminar
         {
-            //  std::cout << "elimin fila i: " << i << std::endl;
             // verificar que en la primera columna de la fila a eliminar no haya cero
             // si ya hubiera cero pasar a eliminar la siguiente fila
             if (_mat[i].count(k) != 0)
@@ -195,7 +189,6 @@ Vector DOK::eliminacionGauss(Vector& b)
             } //fin no hay cero en la primera columna de la fila i
         } // fin filas a eliminar
     } // fin filas pivote
-    std::cout << "terminamos de triangular " << std::endl;
 // mostrarMatriz(*this);
 
     return resolverSistema();
