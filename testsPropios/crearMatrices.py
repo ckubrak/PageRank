@@ -27,6 +27,7 @@ proba = sys.argv[4]
 
 res = []
 
+archivoRes = open("resultados.txt", "w") 
 for m in range(saltos,mFinal,saltos):
     crearMatriz(n,m)
     archivo = os.path.join("tests/", "test_" + str(n) + "_" + str(m) + ".txt")
@@ -44,12 +45,17 @@ for m in range(saltos,mFinal,saltos):
     os.remove(archivo + ".outi")
 
     sparsity = 1-( m / (n**2))
-    res.append((promedio,sparsity))
+    archivoRes.write(str(promedio) + " " + str(sparsity) + "\n")
 
-print (res)
-plt.scatter(*zip(*res))
-plt.xlabel('x')
-plt.ylabel('y')
-plt.show()
+archivoRes.close() 
+
+
+    # res.append((promedio,sparsity))
+
+# print (res)
+# plt.scatter(*zip(*res))
+# plt.xlabel('x')
+# plt.ylabel('y')
+# plt.show()
 
     
