@@ -66,3 +66,12 @@ sobre el taman\~no del $\varepsilon$ por lo que el algoritmo de resoluci\'on que
 \end{codebox}
 Observar que en ning\'un momento verificamos que $a_{kk}$ est\'e definido ya que la matriz permite hacer Eliminación Gausseana sin necesidad
 de pivoteo. \textbf{DECIR POR QUE}
+Luego para determinar las soluciones del sistema\cite{burden}:
+\[
+    x_n = \frac{a_{n,n-1}}{a_{nn}}
+    \]
+    \[
+    x_i = \frac {a_{i,n+1} - \sum_{j=i+1}^{n} a_{ij}x} {a_{ii}}
+    \]
+
+Por \'ulitmo, normalizamos el vector $x$ de manera que $\sum^{n}_{i=1} |x_i| = 1$
