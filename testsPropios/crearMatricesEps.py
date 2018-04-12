@@ -41,9 +41,9 @@ for eps in range(epsIn,epsHasta,1):
     for line in fh:
         tiempos.append(float(line))
     promedio = sum(tiempos)/float(len(tiempos))
-    os.remove(archivo)
+    #os.remove(archivo)
     # os.remove(archivoRes)
-    os.remove(archivo + ".outi")
+    #os.remove(archivo + ".outi")
 
     res.append((promedio,-eps))
 
