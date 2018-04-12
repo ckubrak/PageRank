@@ -20,45 +20,34 @@ def crearMatriz(n,m):
         file.write(str(desde) + " " + str(to) + "\n")
 
 n = int(sys.argv[1])
-mFinal = int(sys.argv[2])
-saltos = int(sys.argv[3])
-proba = sys.argv[4]
+m = int(sys.argv[2])
+proba = sys.argv[3]
+epsIn = int(sys.argv[4])
+epsHasta = int(sys.argv[5])
 
 res = []
 
 
 
-for m in range(saltos,mFinal,saltos):
+for eps in range(epsIn,epsHasta,1):
     crearMatriz(n,m)
 
     archivo = os.path.join("tests/", "test_" + str(n) + "_" + str(m) + ".txt")
     tiempos = []
-    archivoRes = "tiempos/tiempos"+str(n)+"_"+str(mFinal)+"_"+str(proba)+ "_.txt"
-    subprocess.call(["./../build/tp", archivo, proba,archivoRes])
+    archivoRes = "tiempos/eps"+str(n)+"_"+str(m)+"_"+str(proba)+ "_"+ str(float(1*(10**-eps)))+ ".txt"
+    subprocess.call(["./../build/tp", archivo, proba,archivoRes,str(eps)])
 
     fh = open(archivoRes)
     for line in fh:
         tiempos.append(float(line))
     promedio = sum(tiempos)/float(len(tiempos))
     os.remove(archivo)
-    os.remove(archivoRes)
+    # os.remove(archivoRes)
     os.remove(archivo + ".outi")
 
-    sparsity = 1-( m / (n**2))
+    res.append((promedio,-eps))
 
-
-
-    res.append((promedio,sparsity))
-
-resultados = open("resultados/tiempos"+str(n)+"_"+str(mFinal)+"_"+str(proba)+ "_.txt","w") 
+resultados = open("resultados/eps"+str(n)+"_"+str(m)+"_"+str(proba)+" _" + str(eps)+".txt","w") 
 for tupla in res:
     resultados.write(str(tupla[0])+" "+str(tupla[1])+"\n")
 resultados.close() 
-
-
-# plt.scatter(*zip(*res))
-# plt.xlabel('x')
-# plt.ylabel('y')
-# plt.show()
-
-    
