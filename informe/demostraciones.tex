@@ -1,6 +1,8 @@
 \subsubsection*{Demostraciones}
+\providecommand{\abs}[1]{\lvert#1\rvert}
+\providecommand{\norm}[1]{\lVert#1\rVert}
 
-Justificar que:
+1) Justificar que:
 \begin{displaymath}
 A = p WD + ez^{t}
 \end{displaymath}
@@ -8,7 +10,7 @@ A = p WD + ez^{t}
 Estudiemos como son los elementos de la matriz $A = p WD + ez^{t}$:
 
 \begin{displaymath}
-(p WD + ez^{t})_{ij} = p(W\,D)_{ij}+(ez^{t})_{ij} = p(\sum_{k=1}^{n}w_{ik}d_{kj}+1\,z^{t})
+(p WD + ez^{t})_{ij} = p(W\,D)_{ij}+(ez^{t})_{ij} = p(\sum_{k=1}^{n}w_{ik}d_{kj}+1\,z^{t}_j)
 \end{displaymath}
 
 Como D es una matriz diagonal, los elementos distintos de cero únicamente pueden estar en la diagonal, con lo cual al hacer el producto se anulan todos los términos con $k\not=j$ y también aquellos términos donde $w_{ik}=0$ lo cual ocurre cuando $c_j=0$.
@@ -16,7 +18,7 @@ Como D es una matriz diagonal, los elementos distintos de cero únicamente puede
 En consecuencia se puede reescribir:
 
 \begin{displaymath}
-(p WD + ez^{t})_{ij} = p(w_{ij}d_{jj}+z^{t})
+(p WD + ez^{t})_{ij} = p(w_{ij}d_{jj}+z^{t}_j)
 \end{displaymath}
 
 Vamos a separar en casos para analizar los posibles valores que puede tomar el elemento (notar que por la definición de D, la condición $d_{jj}=0$ es equivalente a $c_j=0$):
@@ -48,7 +50,9 @@ Uniendo todo lo anterior tenemos que:
 Pero precisamente esto coincide con la definición de los elementos de la matriz A. Luego $A = p WD + ez^{t}$.
 %demostracion 2como se garantiza la aplicabilidad de EG
 
-¿Cómo se garantiza la aplicabilidad de la Eliminación Gaussiana? ¿La matriz $I-pWD$ está bien condicionada?¿Cómo influye el valor de p?
+2) ¿Cómo se garantiza la aplicabilidad de la Eliminación Gaussiana? ¿La matriz $I-pWD$ está bien condicionada?¿Cómo influye el valor de p?
+
+Primero veamos como se garantiza la aplicabilidad de Eliminación Gaussiana:
 
 Sea $B=W\,D$,
 \begin{displaymath}
@@ -83,6 +87,35 @@ Y por lo tanto:
    \right.
 \end{equation}
 
-La matriz B tiene la particularidad de que la suma de los elementos de cada columna es igual a 1, ya que en cada columna hay $c_j$ elementos de valor $1/c_j$. Por lo tanto en $I-p B$ la suma de los elementos de cada columna es $1+c_j\, p/c_j$ con $|c_j\, p/c_j|<1$ porque $0<p<1$. De esto se desprende que $(I-p B)^t$ es estrictamente diagonal dominante y como se probó en la teórica esto implica que sea no singular. Además, si una matriz es e.d.d. cada una de sus submatrices principales es e.d.d. y entonces todas son no singulares. Por otra parte se puede probar que si una matriz tiene inversa, su traspuesta tiene inversa. Luego podemos afirmar que $(I-p B)$ es no singular y que todas sus submatrices principales también son no singulares, luego $(I-p B)$ tiene descomposición $LU$ que es equivalente a decir que puede realizarse la Eliminación Gaussiana sin que aparezca un cero en la diagonal en ninguno de los pasos del proceso.
+La matriz B tiene la particularidad de que la suma de los elementos de cada columna es igual a 1, ya que en cada columna hay $c_j$ elementos de valor $1/c_j$. Por lo tanto en $I-p B$ la suma de los elementos de cada columna es $1+c_j\, p/c_j$ con $|c_j\, p/c_j|<1$ porque $0<p<1$. De esto se desprende que $(I-p B)^t$ es estrictamente diagonal dominante y como se probó en la teórica esto implica que sea no singular. Además, si una matriz es e.d.d. cada una de sus submatrices principales es e.d.d. y entonces todas ellas son no singulares. Por otra parte se puede probar que si una matriz tiene inversa, su traspuesta tiene inversa (ejercicio 23 c), Práctica 1). Luego podemos afirmar que $(I-p B)$ es no singular y que todas sus submatrices principales también son no singulares, esto garantiza que $(I-p B)$ tiene descomposición $LU$ que es equivalente a decir que puede realizarse la Eliminación Gaussiana sin necesidad de pivoteo en ninguno de los pasos del proceso.
 
+Con respecto al condicionamiento de la matriz, se puede aplicar una propiedad demostrada en la práctica (ejercicio 21, Práctica 2) la cual afirma que: Dada $M \in$ $\mathbb{R}^{nxn}$ tal que $||M||<1$, $I$ la matriz identidad de $\mathbb{R}^{nxn}$ 
+i $||.||$ norma inducida por una norma vectorial: $I+M$ es inversible y $||(I+R)^{-1}||\leq 1/(1-||M||)$.\\
 
+De lo que vimos arriba acerca del formato de las matrices tratadas en el TP, también deducimos que tomando $||.||_1$, $M = -pWD$ estamos en las hipótesis del ejercicio, porque:
+
+\begin{displaymath}
+||-pWD||_1=||pWD||_1=|p|||WD||_1=p*c_j*1/c_j=p.
+\end{displaymath}
+Y como $p<1$, implica que:
+\begin{displaymath}
+||(I-pWD)^{-1}||_1\leq 1/(1-||I-pWD||_1)
+\end{displaymath}
+Si calculamos el número de condición,
+\begin{displaymath}
+K=||I-pWD||||(I-pWD)^{-1}||\leq (1+p) (1/(1-||pWD||)=(1+p) (1/(1-p||WD||)=(1+p)/(1-p)
+\end{displaymath}
+
+Cuanto menor sea $p$ mas cerca de 1 estará el número de condición, lo cual es lógico porque la matriz se parecerá más a I que tiene la característica de tener sus columnas ortogonales. A medida que crece $p$ va aumentando el valor de $K$ tendiendo a infinito si $p$ tiende a 1. en el gráfico \ref{K(p)} se puede ver la relación entre el número de condición y el valor de $p$. Con un ejemplo se puede ver que con un valor relativamente cercano a 1 (0.9) el número de condición sigue siendo aceptable, y recién con valores mayores se puede decir que aumenta rápidamente.
+Supongamos p = 0.9:
+$K\leq (1.9/0.1)=19$.
+
+Para p=0.99: 
+$K\leq (1.99/0.01)=199$. 
+
+\begin{figure}
+  \centering
+    \includegraphics[width=0.7\textwidth]{img/K_tp1.png}
+  \caption{K en función de p}
+  \label{fig:K(p)}
+\end{figure}
