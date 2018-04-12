@@ -12,12 +12,12 @@ def crearMatriz(n,m):
     froms = []
     tos = []
     for x in range(1,m):
-        desde = randint(1,m)
+        desde = randint(1,n)
         while desde in froms:
-            desde = randint(1,m)
-        to = randint(1,m)
+            desde = randint(1,n)
+        to = randint(1,n)
         while to in tos or to == desde:
-            desde = randint(1,m)
+            desde = randint(1,n)
         file.write(str(desde) + " " + str(to) + "\n")
 n = int(sys.argv[1]) #Tam
 m = int(sys.argv[2]) #Links
