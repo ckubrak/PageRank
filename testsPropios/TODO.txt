@@ -1,0 +1,37 @@
+Test cuantitativos:
+
+/testsPropios
+crearMatrices(tamaño, cantidad maxima de links, saltos (de m), proba)
+n = 1500
+m final = 2.000.000
+paso = 50.000
+proba = 0.7
+
+crearMatrizeps(tamano,links, proba, eps desde, eps hasta)
+n = 1000
+m = 10000
+proba = 0.8
+eps desde = 1
+eps hasta = 9
+
+crearMatricesProba(tamano, cantidad de links fijos) eps fijo es 5
+n = 1000
+m = 10000
+
+En /testsPropios
+mkdir /tests /tiempos /resultados
+
+
+Tests cualitativos:
+
+1) aleatorio vs ordenado columna (col1) vs ordenado fila (col2)
+n = 2000
+m = 20000
+proba = 0.8
+eps fijo (5)
+
+2) Nodos con muchos links salientes.
+Matriz de 100, con 50 nodos que apuntan a muchos. 
+Ver que pasas con algunos nodos con muchos links entrantes.
+
+3) Matrices con grafos no conexos. Dibujar
