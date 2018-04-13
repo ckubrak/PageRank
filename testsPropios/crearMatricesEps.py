@@ -8,16 +8,17 @@ import time
 def crearMatriz(n,m):
     file = open("tests/test_" + str(n) + "_" + str(m) + ".txt"  ,"w")
     file.write(str(n) + "\n" + str(m) + "\n")
-    froms = []
-    tos = []
+    
+    pairs = []
     for x in range(1,m):
         desde = randint(1,n)
-        while desde in froms:
+        para = randint(1,n)
+        while ((desde,para) in pairs) or (desde == para):
             desde = randint(1,n)
-        to = randint(1,n)
-        while to in tos or to == desde:
-            desde = randint(1,n)
-        file.write(str(desde) + " " + str(to) + "\n")
+            para = randint(1,n)
+        pairs.append((desde,para))
+
+        file.write(str(desde) + " " + str(para) + "\n")
 
 n = int(sys.argv[1])
 m = int(sys.argv[2])
