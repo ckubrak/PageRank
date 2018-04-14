@@ -1,2 +1,12 @@
-\subsubsection*{Discusión}
-
+\subsection*{An\'alisis cuantitativo}
+\par A partir del an\'alisis cuantitativo, son varias las cosas que nos resulta importante destacar.
+\par Tal como se puede apreciar en la Figura \ref{fig:sparcity} la sparcity afecta notablemente el rendimiento en cuanto a tiempo del algoritmo,
+lo cual nos hace pensar que nuestra implementaci\'on funciona bien para matrices con $\delta \approx 0$ y no tanto con $\delta \approx 1$.
+Es por esto que para casos donde la matriz no es rala, podr\'ia resultar m\'as eficiente una implementaci\'on distinta.
+\par As\'i mismo, a partir de la Figura \ref{fig:proba} podemos tambi\'en notar una correlaci\'on con el tiempo. Consideramos que esto se debe
+principalmente al hecho de que con menor $p$, menor es el m\'odulo del resultado de $pWD$, raz\'on por la cual en la ecuaci\'on \ref{ipwd} hay en
+cuesti\'on n\'umeros m\'as peque\~os que por la precisi\'on dictada por $\varepsilon$ terminan desapareciendo.
+\par En el \'ultimo caso, no pudimos establecer una relaci\'on entre el tiempo y el $varepsilon$. Supusimos que podr\'ia llega a haber alguna 
+relaci\'on ya que a menor $\varepsilon$, m\'as son los n\'umeros que se consideran cero. En este esquema de implementaci\'on, que un n\'umero sea
+considerado cero implica que a la hora de realizar la Eliminaci\'on Gausseana \ref{elimGaussRala}, la posici\'on no est\'a definida, por lo que 
+deber\'ia realizar menos operaciones.
