@@ -74,19 +74,37 @@ Luego para determinar las soluciones del sistema\cite{burden}:
     \]
 
 Por \'ulitmo, normalizamos el vector $x$ de manera que $\sum^{n}_{i=1} |x_i| = 1$
-
+\subsection*{Experimentaci\'on}
 \par
-En cuanto a la experimentaci\'on, pensamos en testear nuestra resoluci\'on de dos formas diferentes. La primera con tests automatizados, generando matrices "aleatorias" para ir testeando como se comportaba nuestra implementaci\'on variando distintos parametros -como probabilidad, tamaño de la matriz, cantidad de links, epsilon-, y por otro lado pensamos tests cualitativos, es decir, casos particulares que nos parecieron interesantes y nos era complicado generar de forma autom\'atica.
+En cuanto a la experimentaci\'on, pensamos en probar nuestra implementaci\'on de dos formas diferentes: de manera cualitativa y cuantitiativa.
+Para realizar el an\'alisis cualitativo, generamos matrices aleatorias para luego variar los distintos parametros tales como probabilidad, 
+tamaño de la matriz, cantidad de links y epsilon, para poder luego evaluar su incidencia. Para el an\'alisis cualitativo, construimos casos particulares
+que nos resultaron interesantes analizar por diversos motivos.
 
 \par 
-Comenzando con los tests automatizados, pensamos en tres tests distintos.\newline
-En el primero de estos tests, lo que hic\'imos fue crear entradas de matrices aleatorias con tamaño $n$, probabilidad $p$ y $\varepsilon$ fijos, y variando la cantidad de links $m$ de la matriz generada, es decir qu\'e tan rala es. A partir de esto, buscamos encontrar una relaci\'on entre la \textit{sparsity} y el tiempo.\newline
-En este test nuestra expectativa fue encontrarnos con un incremento en el tiempo a medida que la \textit{sparsity} de nuestra matriz de entrada era menor, considerando que la implementaci\'on fue diseñada para funcionar de manera eficiente en matrices de este tipo.
+
+Con respepcto al an\'alisis cuantitiativo, varianmos los tres par\'ametros que considerados que podr\'ian ser interesantes de analizar:
+el tama\~no de la matriz $n$, la cantidad de links $m$, la probabilidad $p$ y el $\varepsilon$.
+\newline
+En el primero de estos tests, creamos matrices de entrada aleatorias con tamaño $n$, probabilidad $p$ y $\varepsilon$ fijos, mientras variaban la cantidad de links $m$
+de la matriz generada, es decir cambiando qu\'e tan rala es. A partir de esto, buscamos encontrar una relaci\'on entre la \textit{sparsity} y el tiempo.\newline
+En este test nuestra expectativa fue encontrarnos con un incremento en el tiempo a medida 
+que la \textit{sparsity} de nuestra matriz de entrada era menor, considerando que la
+implementaci\'on fue diseñada para funcionar de manera eficiente en matrices de este tipo.
 
 \par
-Como segundo test automatizado, evaluamos incidencia del parametro $p$ en el tiempo de ejecuci\'on en una matriz de tamaño $m$, cantidad de links $n$ y $\varepsilon$ fijos.\newline
-Entonces, al ver la ecuaci\'on \ref{ipwd} observamos que a media que el parametro $p$ decrezce, tambi\'en lo hace el resultado de $pWD$ y, por la forma en que implementamos la igualdad, tener elementos m\'as pequeños en una matriz implica que m\'as elementos de la misma podr\'ian ser considerados ceros (dependiendo del $\varepsilon$ que estemos utilizando).\newline
-Luego esto nos hace pensar que resolver la ecuaci\'on anterior en con un $p$ relativamente pequeño  requerir\'ia menos tiempo.\newline
-Por \'ultimo, no quisimos pasar por alto otro aspecto que toma cierta relevancia en este test, el n\'umero de condici\'on. 
-Como est\'a señalado en el ap\'endice, vimos que a menor $p$, mejor condicionada est\'a la matriz, entonces a medida que aumenta $p$, aumentar\'a tambi\'en la cota superior que tenemos para el n\'umero de condici\'on, con lo que nuestro calculo podr\'ia volverse menos estable, en el sentido de a pesar de no conocer el error, nos exponemos a que sea m\'as grande.\newline
-Si bien esto nos abre el camino a nuevas experimentaciones, entendemos que el eje de este trabajo no pasa por ac\'a, es por esto que simplemente lo mencionamos como un posible tema de inter\'es para una pr\'oxima investigaci\'on.
+Como segundo test, buscamos evaluar incidencia del parametro $p$ en el tiempo de ejecuci\'on en una matriz de tamaño $m$, cantidad de links $n$ 
+y $\varepsilon$ fijos.\newline
+Al ver la ecuaci\'on \ref{ipwd} observamos que a media que el parametro $p$ decrece, tambi\'en lo hace el resultado de $pWD$ y, 
+por la forma en que implementamos la igualdad, tener elementos m\'as pequeños en una matriz implica que m\'as elementos de la misma podr\'ian 
+ser considerados ceros (dependiendo del $\varepsilon$ que estemos utilizando).\\
+Esto nos hace pensar que resolver la ecuaci\'on anterior en con un $p$ relativamente pequeño  requerir\'ia menos tiempo.
+Por \'ultimo, no quisimos pasar por alto otro aspecto que consideramos que consideramos que podr\'ia tener cierta relevancia en este test, el n\'umero de condici\'on. 
+Como est\'a señalado en el ap\'endice, vimos que a menor $p$, mejor condicionada est\'a la matriz, entonces a medida que aumenta $p$, 
+aumentar\'a tambi\'en la cota superior que tenemos para el n\'umero de condici\'on, con lo que nuestro calculo podr\'ia volverse menos estable, 
+en el sentido de a pesar de no conocer el error, nos exponemos a que sea m\'as grande.
+Si bien esto nos abre el camino a nuevas experimentaciones, entendemos que el eje de este trabajo no es este, es por esto que simplemente lo mencionamos como un posible tema de inter\'es para una pr\'oxima investigaci\'on.
+
+\par
+Como \'ultima pruba cualitativa, mantuvimos fijos el tama\~no de la matriz $n$, la cantidad de links $m$, la probabilidad $p$ y variamos la precisi\'on del $\varepsilon$.
+A la hora de realizar este test, estimamos que la variaci\'on del $\varepsilon$ no afectar\'a de manera significativa el tiempo de ejecuci\'on.
