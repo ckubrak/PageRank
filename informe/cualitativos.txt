@@ -1,0 +1,139 @@
+\subsubsection*{cualitativos}
+\providecommand{\abs}[1]{\lvert#1\rvert}
+\providecommand{\norm}[1]{\lVert#1\rVert}
+
+
+Elaboramos diferentes casos de test y tratamos de predecir el resultado del ranking para luego compararlo con los resultados obtenidos usando el algoritmo implementado. Para esots casos se decidió usar una cantidad chica de nodos debido a la dificultad para graficar y analizar grafos grandes.
+Empezamos por casos muy simples como una cadena, sumando de a poco links para observar como influyen en el ranking.
+Finalmente decidimos elaborar un grafo m\'as complejo con un esquema en el que se puede reconocer dos subgrafos principales más densamente conectados internamente y con algunos pocos links entre ellos, incluyendo además nodos desconectados. La idea de estos \'ultimos grafos fue simular, a pequeña escala, como funcionaría si tuviésemos por ejemplo dos sitios diferentes (por ejemplo uno de los subgrafos podría ser un portal de noticias), en los cuales hay muchas referencias a p\'aginas internas del sitio y esporádicamente links a p\'aginas de otros sitios. A su vez la p\'agina principal del portal puede ser referenciada desde otros sitios.
+
+Los ejemplos utilizados fueron los siguientes:
+
+1) Grafo con 5 nodos formando una cadena simple:
+\begin{figure}
+  \centering
+    \includegraphics[width=0.7\textwidth]{img/cadena4.png}
+  \caption{Cadena simple de nodos}
+  \label{fig:Cadena simple}
+\end{figure}
+
+2)
+\begin{figure}
+  \centering
+    \includegraphics[width=0.7\textwidth]{img/cadena6v1.png}
+  \caption{Cadena con nodo central (caso 1)}
+  \label{fig: Cadena con nodo central (caso 1)}
+\end{figure}
+
+3)
+\begin{figure}
+  \centering
+    \includegraphics[width=0.7\textwidth]{img/cadena6v2.png}
+  \caption{Cadena con nodo central (caso 1)}
+  \label{fig: Cadena con nodo central (caso 2)}
+\end{figure}
+
+4)
+\begin{figure}
+  \centering
+    \includegraphics[width=0.7\textwidth]{img/cadena6v3.png}
+  \caption{Cadena con nodo central (caso 1)}
+  \label{fig: Cadena con nodo central, con ciclo}
+\end{figure}
+
+Resutados:
+Caso de prueba 1:
+La predicción es que el primer nodo al cual solamente se puede llegar por un salto aleatorio es el que va a tener menor probabilidad. La cual deber\'ia ir aumentando en forma creciente a medida que se progresa en la cadena ya que a los siguientes nodos se puede acceder aleatoriamente o a traves de los links desde los nodos precedentes.
+Resultado caso 1: coincide con lo previsto.
+
+C\begin{figure}
+  \centering
+    \includegraphics[width=0.7\textwidth]{img/barrascadena4.png}
+  \caption{Ranking cadena simple}
+  \label{fig:Ranking cadena simple}
+\end{figure}
+
+2)
+
+\begin{figure}
+  \centering
+    \includegraphics[width=0.7\textwidth]{img/Cadena6v1.png}
+  \caption{Cadena con nodo central (caso 1)}
+  \label{fig: Ranking cadena con nodo central (caso 1)}
+\end{figure}
+
+3)
+\begin{figure}
+  \centering
+    \includegraphics[width=0.7\textwidth]{img/Cadena6v2.png}
+  \caption{Cadena con nodo central (caso 1)}
+  \label{fig: Ranking cadena con nodo central (caso 2)}
+\end{figure}
+
+4)
+\begin{figure}
+  \centering
+    \includegraphics[width=0.7\textwidth]{img/Cadena6v3.png}
+  \caption{Cadena con nodo central (caso 1)}
+  \label{fig: Renking cadena con nodo central, con ciclo}
+\end{figure}
+
+
+
+Caso de prueba 2) Al grafo del caso anterior se le agregan un nodo al cual convergen links desde los nodos del principio de la cadena. Predicción: nuevamente el primer nodo será el de puntuaci\'on m\'as baja, y el nuevo nodo va a tener la puntuaci\'on m\'as alta pues a él se puede acceder desde varios nodos, además de aleatoriamente. El puntaje de este nodo tiene que ser en detrimento de los puntajes de los últimos nodos de la cadena que ahora ver\'an reducida la posibilidad de ser alcanzado a través de los links. En particular el último nodo de a cadena deber\'ia reducir su probabilidad de forma importante.
+Resultado: Sigue el orden creciente pero ahora el nodo 6 tiene el mayor ranking seguido del 5 que si bien disminuy\'o su puntaje creci\'o relativamente comparado al resto de los nodos. Esto sería porque desde los otros nodos se puede llegar a \'el por varios caminos, mientras que a los primeros nodos de la cadena la llegada aleatoria sigue teniendo un rol importante.
+Hubieramos esperado que el nodo 5 siga teniendo un alto puntaje en comparaci\'on a los otros.
+
+
+
+3)Se modifica el grafo del punto 2 para agregar un link al nodo central desde el último nodo de la cadena original, eliminando la bifurcaci\'on en su precedente, ahora deber\'ia bajar la probabilidad del nodo 5 que ahora tiene un camino de salida hacia 6, manteniendose el nodo 6 con el puntaje más alto
+Resultado: El nodo 6 incrementa notablemente su puntaje pero sobre todo a costa del nodo 5, mientras que los demás nodos siguen con un puntaje m\'as bajo pero similar entre ellos.
+
+4)Ahora se agrega un link del nodo 6 al 1. De esta forma se crea un ciclo que hace accesible a los nodos de la cadena original a partir de un camino de links desde cualquier nodo inicial. Esto deber\'ia reflejarse en un aumento de la probabilidades de todos los nodos de la cadena a costa de una disminución en el puntaje del nodo 6, que de todas maneras debe mantener el primer lugar
+Resultado: Efectivamente el nodo 6 conserv\'o la primera posici\'on pero casi a la par de los nodos 1 y 2. Resulta l\'ogico ya que viendo la forma del grafo es muy probable ciclar entre estos tres nodos una vez que se ha llegado a uno de ellos.
+
+Hasta ahora lo que se ve es una relaci\'on entre la accesibilidad de los nodos y su puntaje final.
+
+
+
+
+Casos con 25 nodos:
+
+
+links entrantes:
+
+En este grafo hay dos nodos en los cuales se concentran muchos links entrantes de cada subgrafo, estos dos nodos tienen cada uno un link que apunta al mismo nodo, este a su vez, retroalimenta el ciclo, apuntando a los nodos mas bajos de la cadena.
+En este caso esperamos ver que los nodos mas pesados del grafo sean aquellos que reciben muchos links entrantes, y el nodo al que apuntan los dos previamente mencionados.
+
+Resultado: El nodo que tiene las dos entradas resulta ser el mas importante, y los dos nodos con muchas entradas son los segundos m\'as importantes. 
+
+links salientes:
+
+Este grafo es similar al anterior, pero los links tienen las direcciones invertidas, por lo tanto, en este grafo los nodos con muchos salientes terminan concentrando su peso en el nodo que retroalimenta el ciclo apuntando a los dos nodos con muchos links salientes.
+En este experimento esperamos que el nodo con mayor probabilidad sea el que retroalimenta el ciclo, y que los nodos a los que esto apunta sean los siguientes con mayor probabilidad.
+
+Resultado: El nodo que concentra todos los caminos y retroalimenta el ciclo resulta ser el nodo mas importante del grafo, seguido por los nodos con muchos links salientes, y a medida que se avanza en el ciclo, las probabilidades van bajando.
+
+links grafos separados:
+
+En este caso, hay 3 subgrafos sin conexi\'on entre ellos, no hay ning\'un tipo de estancamiento, es decir, todos los nodos tienen links salientes.
+
+En este experimento esperamos que los nodos con m\'as probabilidad sean aquellos que reciben el \'unico link saliente de otro nodo, o aquellos que sean un paso obligado para unir dos partes distintas de cada subgrafo.
+
+Resultado: Los nodos mas probables resultaron ser aquellos que adem\'as de recibir el \'unico link saliente de otro nodo y ser un paso obligado, tienen un ciclo con otro nodo.
+
+links a ciclo:
+
+En este grafo hay un grupo de grafos que permanece ciclando, y otros, que se relacionan entre ellos, apuntando finalmente a un nodo que sirve de nexo entre los dos grupos.
+
+El resultado esperado en este caso es que los nodos del ciclo tengan mayor peso que los dem\'as nodos.
+
+Resultado: Los nodos m\'as probables en este caso resultaron ser los nodos del ciclo y tambi\'en el nodo que conecta las dos partes del grafo.
+
+links a ciclo al reves:
+
+En este caso, hay dos mitades del grafo, una con ciclos y otra con dos nodos sin links salientes que sirven como final para la mayor\'ia de caminos posibles, dichas partes est\'an conectadas por un \'unico nodo.
+
+En este caso esperamos que los nodos que sirven como final sean de los m\'as probables, tambi\'en que los nodos que ciclan y el nodo nexo lo sean.
+
+Resultado: Debido a la diferencia de caminos, uno de los nodos finales se impuso como m\'as probable, seguido por los nodos pertenecientes al ciclo, luego de estos, el otro nodo final y el nodo nexo.
