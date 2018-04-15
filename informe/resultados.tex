@@ -42,9 +42,41 @@ tiempo.
 
 \paragraph{Tests cualitativos}
 
+\paragraph{Casos con 25 nodos}
 
-Grafo con 5 nodos formando una cadena simple:
-\begin{figure}
+links entrantes: En este grafo hay dos nodos en los cuales se concentran muchos links entrantes de cada subgrafo, estos dos nodos tienen cada uno un link que apunta al mismo nodo, este a su vez, retroalimenta el ciclo, apuntando a los nodos mas bajos de la cadena.
+En este caso esperamos ver que los nodos mas pesados del grafo sean aquellos que reciben muchos links entrantes, y el nodo al que apuntan los dos previamente mencionados.
+
+Resultado: El nodo que tiene las dos entradas resulta ser el mas importante, y los dos nodos con muchas entradas son los segundos m\'as importantes. 
+
+Links salientes: Este grafo es similar al anterior, pero los links tienen las direcciones invertidas, por lo tanto, en este grafo los nodos con muchos salientes terminan concentrando su peso en el nodo que retroalimenta el ciclo apuntando a los dos nodos con muchos links salientes.
+En este experimento esperamos que el nodo con mayor probabilidad sea el que retroalimenta el ciclo, y que los nodos a los que esto apunta sean los siguientes con mayor probabilidad.
+
+Resultado: El nodo que concentra todos los caminos y retroalimenta el ciclo resulta ser el nodo mas importante del grafo, seguido por los nodos con muchos links salientes, y a medida que se avanza en el ciclo, las probabilidades van bajando.
+
+Links grafos separados: En este caso, hay 3 subgrafos sin conexi\'on entre ellos, no hay ning\'un tipo de estancamiento, es decir, todos los nodos tienen links salientes.
+
+En este experimento esperamos que los nodos con m\'as probabilidad sean aquellos que reciben el \'unico link saliente de otro nodo, o aquellos que sean un paso obligado para unir dos partes distintas de cada subgrafo.
+
+Resultado: Los nodos mas probables resultaron ser aquellos que adem\'as de recibir el \'unico link saliente de otro nodo y ser un paso obligado, tienen un ciclo con otro nodo.
+
+Links a ciclo: En este grafo hay un grupo de grafos que permanece ciclando, y otros, que se relacionan entre ellos, apuntando finalmente a un nodo que sirve de nexo entre los dos grupos.
+
+El resultado esperado en este caso es que los nodos del ciclo tengan mayor peso que los dem\'as nodos.
+
+Resultado: Los nodos m\'as probables en este caso resultaron ser los nodos del ciclo y tambi\'en el nodo que conecta las dos partes del grafo.
+
+Links a ciclo al reves: En este caso, hay dos mitades del grafo, una con ciclos y otra con dos nodos sin links salientes que sirven como final para la mayor\'ia de caminos posibles, dichas partes est\'an conectadas por un \'unico nodo.
+
+En este caso esperamos que los nodos que sirven como final sean de los m\'as probables, tambi\'en que los nodos que ciclan y el nodo nexo lo sean.
+
+Resultado: Debido a la diferencia de caminos, uno de los nodos finales se impuso como m\'as probable, seguido por los nodos pertenecientes al ciclo, luego de estos, el otro nodo final y el nodo nexo.
+
+
+En las figuras \ref{fig:Ranking cadena simple}, \ref{fig:Ranking cadena con nodo central}, \ref{fig:Ranking nodos con muchos links salientes} y \ref{fig:Ranking nodos con muchos links entrantes} se pueden observar los resultados de los experimentos expuestos en el desarrollo.
+Otros gráficos se pueden encontrar en el apéndice.
+
+\begin{figure}[h]
 	\centering
 	\includegraphics[width=0.7\textwidth]{img/barrascadena4.png}
 	\caption{Cadena simple de nodos}
@@ -52,28 +84,26 @@ Grafo con 5 nodos formando una cadena simple:
 \end{figure}
 
 
-Nodos con muchos links salientes
-C\begin{figure}
+C\begin{figure}[h]
 	\centering
-	\includegraphics[width=0.7\textwidth]{}
+	\includegraphics[width=0.7\textwidth]{img/cadena6v2.png}
+	\caption{Cadena con nodo central(caso 2)}
+	\label{fig:Ranking cadena con nodo central}
+\end{figure}
+
+
+C\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.7\textwidth]{img/links_salientes_25.png}
 	\caption{Nodos con muchos links salientes}
 	\label{fig:Ranking nodos con muchos links salientes}
 \end{figure}
 
 
-Nodos con muchos links entrantes
-C\begin{figure}
+
+C\begin{figure}[h]
 	\centering
-	\includegraphics[width=0.7\textwidth]{}
+	\includegraphics[width=0.7\textwidth]{img/links_entrantes_25.png}
 	\caption{Nodos con muchos links entrantes}
 	\label{fig:Ranking nodos con muchos links entrantes}
-\end{figure}
-
-
-Grafos sin links salientes
-C\begin{figure}
-	\centering
-	\includegraphics[width=0.7\textwidth]{img/cadena6v1.png}
-	\caption{Grafos sin links salientes}
-	\label{fig:Ranking grafos sin links salientes}
 \end{figure}
