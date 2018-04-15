@@ -29,7 +29,7 @@ Se puede apreciar como la elecci\'on de la probabilidad tambi\'en afecta en el t
 \paragraph{Variaci\'on del epsilon}
 
 Para analizar c\'omo afecta el $\varepsilon$ con el tiempo, tomamos como par\'ametros fijos $n = 1000$, $m$ = 500,
-$\varepsilon = 10^{-5}$ y variamos $p$ desde $0.01$ hasta $0.99$ con un incremeto de $0.01$ en cada paso.
+$\varepsilon = 10^{-5}$ y variamos $p$ desde $0.01$ hasta $0.99$ con un incremento de $0.01$ en cada paso.
 \begin{figure}[H] 
 \centering
 \includegraphics[width=0.7\textwidth]{img/Eps.png}
@@ -39,3 +39,41 @@ $\varepsilon = 10^{-5}$ y variamos $p$ desde $0.01$ hasta $0.99$ con un incremet
 
 En este caso, pese a correr varias veces el test con distintos valores, no logramos apreciar correlaci\'on alguna entre la variaci\'on del $\varepsilon$ y el
 tiempo.
+
+\paragraph{Tests cualitativos}
+
+
+Grafo con 5 nodos formando una cadena simple:
+\begin{figure}
+	\centering
+	\includegraphics[width=0.7\textwidth]{img/barrascadena4.png}
+	\caption{Cadena simple de nodos}
+	\label{fig:Ranking cadena simple}
+\end{figure}
+
+
+Nodos con muchos links salientes
+C\begin{figure}
+	\centering
+	\includegraphics[width=0.7\textwidth]{}
+	\caption{Nodos con muchos links salientes}
+	\label{fig:Ranking nodos con muchos links salientes}
+\end{figure}
+
+
+Nodos con muchos links entrantes
+C\begin{figure}
+	\centering
+	\includegraphics[width=0.7\textwidth]{}
+	\caption{Nodos con muchos links entrantes}
+	\label{fig:Ranking nodos con muchos links entrantes}
+\end{figure}
+
+
+Grafos sin links salientes
+C\begin{figure}
+	\centering
+	\includegraphics[width=0.7\textwidth]{img/cadena6v1.png}
+	\caption{Grafos sin links salientes}
+	\label{fig:Ranking grafos sin links salientes}
+\end{figure}
