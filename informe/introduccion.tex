@@ -16,9 +16,9 @@ donde
    \right.
 \end{equation}
 
-Como se puede ver en (citar demo), la matriz $A$ puede rescribirse como
+Esta matriz $A$ puede rescribirse como (ver Apendice)
 
-\begin{equation}
+\begin{equation}\label{eq:desarrollada}
     A = p WD + ez^{t}
 \end{equation}
 donde
@@ -67,17 +67,11 @@ como la forma de procesar la informaci\'on. Para lograr dicha optimizaci\'on dec
  este tipo de estructura, teniendo en cuenta un uso eficiente de los recursos del sistema 
  (intentando sacar provecho del conocimiento que tenemos de entrada sobre las matrices). 
 Es en este contexto que decidimos utilizar un h\'ibrido entre el formato LL (List of Lists) y 
-DOK (Dictionary of Keys).\newline
+DOK (Dictionary of Keys).
 
 
-Cuando comenzamos a pensar este problema, nos encontramos con que pod\'iamos interpretarlo como una especie de Cadena de Markov. Esto es, un proceso estoc\'astico en el que basados en nuestro estado actual, podemos describir la probabilidad futura -en nuestro caso el ranking, p\'aginas ordenadas por probabilidad- sin importarnos los estados previos.\newline
-
-Luego podr\'iamos interprear la matriz \begin{equation}
-    A = p WD + ez^{t}
-\end{equation}
-como que dada una p\'agina $k$ en la cual estamos situados, en el pr\'oximo paso estaremos en alguna de las p\'aginas a las que apunta $k$ con probabilidad $p$ \'o bien en alguna p\'agina eleg\'ida al azar entre todas las conocidas, con probabilidad ($1-p$).\newline
-
+Cuando comenzamos a pensar este problema, nos encontramos con que pod\'iamos interpretarlo como una especie de Cadena de Markov. Esto es, un proceso estoc\'astico en el que basados en nuestro estado actual, podemos describir la probabilidad futura -en nuestro caso el ranking, p\'aginas ordenadas por probabilidad- sin importarnos los estados previos.
+Luego podr\'iamos interprear la matriz \label{eq:desarrollada} como que dada una p\'agina $k$ en la cual estamos situados, en el pr\'oximo paso estaremos en alguna de las p\'aginas a las que apunta $k$ con probabilidad $p$ \'o bien en alguna p\'agina eleg\'ida al azar entre todas las conocidas, con probabilidad ($1-p$).
 La idea detr\'as del $p$ es modelar la forma en la que se va a comportar nuestro ``caminante aleatorio", es decir, la cantidad de veces que va a seguir alguno de los links salientes de las p\'aginas en las que est\'e situado antes de saltar a una p\'agina totalmente aleatoria.
 Podemos notar que la cantidad de pasos antes de saltar a una p\'agina aleatoria es un n\'umero es una variable aleatoria con distribuci\'on         $X$ $\sim$ $G_0$ ($1-p$).\newline
-
 Entonces, observamos que otra forma en la podr\'iamos armar nuestro rankeador ser\'ia multiplicando la matriz de transici\'on por si misma una cantidad de veces finita lo suficientemente grande como para luego poder utilizar con cierta confianza la Ley de los Grandes N\'umeros para Markov.

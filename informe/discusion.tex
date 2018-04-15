@@ -1,5 +1,12 @@
 \subsubsection*{Discusión}
-
+\paragraph{Test cuantitativos}
+Los resultados de estos tests corresponden en gran medida con los esperados. Pudimos observar c\'omo aumenta notablemente el tiempo
+a medida que la matriz es menos rala. Esto se debe a que cuanto menos rala es una matriz, debemos realizar m\'as operaciones y es m\'as la
+memoria requerida para operar lo cual también ralentiza el proceso.\newline
+Por el lado de la variaci\'on de la probabilidad también afecta al tiempo de ejecuci\'on. Tal como predijimos, a menor $p$ m\'as son
+los coeficientes de la matriz $A$ lo cual puede hacer que sean "descartados" por ser su m\'odulo menor que el $\varepsilon$ utilizado.\newline
+Por \'ultimo no pudimos establecer ninguna relaci\'on entre el $\varepsilon$ y el tiempo. Buscamos además
+analizar el gr\'afico utlizando una escala logar\'itmica para ver si se pod\'ia apreciar algua relaci\'on, la cual no pudimos encontrar.
 \paragraph{Tests cualitativos}
 Los resultados obtenidos en los tests realizados con las cadenas simples, en general muestran que los nodos con mayor cantidad de caminos que pasan por ellos tienen una mayor probabilidad final, siendo esta superior cuando el nodo se halla al final del camino o antes de un nodo con estas características. La explicación puede ser que los primeros nodos de una cadena solamente van a ser accesibles por un salto aleatorio o navegando a través de links desde sus nodos precedentes. A medida que se avanza en el camino se suman las posibilidades de que algún navegante entre a ese camino y siga los links hasta los nodos que siguen. Esto se puede ver en los casos de la Cadena simple y Cadena con nodo central (caso 1 y caso 2). En la prueba Cadena con nodo central (caso 3) donde se generó un ciclo hacia el nodo que concentraba mayor cantidad de ejes entrantes (nodo 6) y se pudo observar como los nodos 1 y 2 que ahora se pueden alcanzar por medio de un ciclo aumentan su probabilidad en comparación con los demás nodos.
 
