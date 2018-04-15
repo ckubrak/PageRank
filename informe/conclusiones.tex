@@ -1,3 +1,23 @@
 \subsubsection*{Conclusiones}
 
-En general los resultados obtenidos respecto del ranking coincidieron con las expectativas en el sentido de que a mayor cantidad de caminos entrantes a un nodo mayor puntuación recibe, que nodos que solo pueden ser accesibles aleatoriamente son los de puntajes más bajos y que a medida  que los nodos están más próximos a los nodos más alcanzables también sube su puntuación. En ese sentido nos pareció que el ranking es bueno. Por supuesto asumiendo que en un caso real la cantidad de links hacia una página efectivamente responda a que su contenido es valioso para los usuarios. Lo cual es un aspecto que está totalmente fuera de evaluación en este caso.
+En general los resultados obtenidos respecto del ranking coincidieron con las expectativas en el sentido de que a mayor cantidad de caminos entrantes a un nodo mayor puntuación recibe, que nodos que solo pueden ser accesibles aleatoriamente son los de puntajes más bajos y que a medida  que los nodos están más próximos a los nodos más alcanzables también sube su puntuación. En ese sentido nos pareció que el ranking es bueno.\\
+\begin{comment}
+Por supuesto asumiendo que en un caso real la cantidad de links hacia una página efectivamente responda a que su contenido es valioso para los usuarios. Lo cual es un aspecto que está totalmente fuera de evaluación en este caso.
+\end{comment}
+
+\par
+En cuanto a la estructura que utilizamos, tambi\'en podemos  afirmar que estuvieron a la altura de nuestras expectativas. Como observamos a lo largo de los sucesivos tests, bajo una \textit{sparsity} relativamente pequeña, nuestra estructura lo resuelve de manera eficiente, es que justamente fue diseñada para desempeñarse bien en estos casos.\newline
+Y es que si bien con una \textit{sparsity} m\'as grande esa ventaja se pierde no es algo que nos preocupe demasiado, dificilmente esas situaciones se presenten en el mundo real.\newline Pensemos en un \'indice de p\'aginas real (valga la redundancia), su tamaño ser\'ia considerablemente grande (hablamos de millones de p\'aginas indexadas), pero sabemos que salvo con unas pocas excepciones, las p\'aginas no tienen links que redireccionen a m\'as que unas cientas de p\'aginas, de ning\'una manera un n\'umero considerable frente a la cantidad total de p\'aginas del \'indice.\newline
+Luego si quisieramos representar en una matriz nuestro \'indice de p\'aginas, creemos que se tratar\'ia de una matriz claramente rala.\newline
+Entonces estimamos que el m\'etodo que eleg\'imos para resolver este problema es ventajoso para el uso que le vamos a dar.
+\\
+\par 
+Tampoco quisimos dejar de mencionar un par de aristas de este trabajo, que si bien entendemos que no son fundamentales y se escapan un poco del scope de lo que buscamos mostrar en el tp (y es por esto que no nos interiorizamos m\'as en ellas), nos parece que pueden tener cierto valor para una eventual experimerntaci\'on posterior.\newline
+
+Uno de estos puntos es la injerencia del n\'umero de condici\'on.\newline
+Como est\'a señalado en el ap\'endice, vimos que a menor $p$, mejor condicionada est\'a la matriz, entonces a medida que aumenta $p$, 
+aumentar\'a tambi\'en la cota superior que tenemos para el n\'umero de condici\'on, con lo que nuestro c\'alculo podr\'ia volverse menos estable, 
+en el sentido de que a pesar de no conocer el error, nos exponemos a que este sea mayor.
+\\
+\par
+Por \'ultimo, retomando lo mencionado en el desarrollo acerca de las Cadenas de Markov, nos pareci\'o interesante notar que otra forma de resolver este problema podr\'ia haber sido armar nuestro rankeador multiplicando la matriz de transici\'on por si misma una cantidad de veces finita lo suficientemente grande como para luego poder utilizar con cierta confianza la Ley de los Grandes N\'umeros para Markov.
