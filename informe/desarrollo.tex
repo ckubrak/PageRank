@@ -19,7 +19,7 @@ implementado sobre una estructura autobalanceada (\verb|std::map|) o un dicciona
 implementado sobre una tabla de hash (\verb|std::unordered_map|). Si bien este \'ulitmo permite
 el acceso en $O(1)$ en promedio frente al acceso en $O(\log n)$ del diccionario ordenado, 
 no resulta f\'acil iterar eficientemete por lo que terminamos decidi\'endonos por la versi\'on autobalanceada.
-\par Nuestro objetivo es resolver el listem a \ref{eq:Axx} o equivalentemente el sistema \ref{ipwd}, para lo cual 
+\par Nuestro objetivo es resolver el sistema \ref{eq:Axx} o equivalentemente el sistema \ref{ipwd}, para lo cual 
 resulta pr\'actico y eficiente utilizar Eliminación Gaussiana:
 
 \begin{codebox}
@@ -75,6 +75,7 @@ Luego para determinar las soluciones del sistema\cite{burden}:
 
 Por \'ulitmo, normalizamos el vector $x$ de manera que $\sum^{n}_{i=1} |x_i| = 1$
 \subsection*{Experimentaci\'on}
+
 \par
 En cuanto a la experimentaci\'on, pensamos en probar nuestra implementaci\'on de dos formas diferentes: de manera cualitativa y cuantitativa.
 Para realizar el an\'alisis cuantitativo, generamos matrices aleatorias para luego variar los distintos parametros tales como probabilidad, 
@@ -109,12 +110,13 @@ Si bien esto nos abre el camino a nuevas experimentaciones, entendemos que el ej
 Como \'ultima prueba cuantitativa, mantuvimos fijos el tama\~no de la matriz $n$, la cantidad de links $m$, la probabilidad $p$ y variamos la precisi\'on del $\varepsilon$.
 A la hora de realizar este test, estimamos que la variaci\'on del $\varepsilon$ no afectar\'a de manera significativa el tiempo de ejecuci\'on.
 
-\paragraph {Pruebas Cualitativas:}
+\par
+Para analizar cualitativamente realizamos diversos tests a partir de casos de grafos particulares que nos resultaron importante destacar.
 Elaboramos diferentes casos de test y tratamos de predecir el resultado del ranking para luego compararlo con los resultados obtenidos usando el algoritmo implementado. Para estos casos se decidió usar una cantidad chica de nodos debido a la dificultad para graficar y analizar grafos grandes.
 Empezamos por casos muy simples como una cadena, sumando de a poco links para observar como influyen en el ranking.
 Finalmente decidimos elaborar un grafo m\'as complejo con un esquema en el que se puede reconocer dos subgrafos principales m\'as densamente conectados internamente y con algunos pocos links entre ellos, incluyendo además nodos desconectados. La idea de estos últimos grafos fue simular, a pequeña escala, como funcionaría si tuviésemos por ejemplo dos sitios diferentes (por ejemplo uno de los subgrafos podría ser un portal de noticias), en los cuales hay muchas referencias a páginas internas del sitio y espor\'adicamente links a páginas de otros sitios. A su vez la página principal del portal puede ser referenciada desde otros sitios. En el cuerpo principal del informe vamos a analizar casos tales como los de las figuras \ref{fig:Cadena simple}, \ref{fig:Cadena con nodo central}, \ref{fig:Nodos con muchos links salientes}, \ref{fig:Nodos con muchos links entrantes}. Para observar m\'as experimentos, dirigirse al ap\'endice.
 
-\begin{figure}[h]
+\begin{figure}[H]
 	\centering
 	\includegraphics[width=0.7\textwidth]{img/cadena4.png}
 	\caption{Nodos enlazados en una sola dirección}
@@ -123,7 +125,7 @@ Finalmente decidimos elaborar un grafo m\'as complejo con un esquema en el que s
 
 
 
-\begin{figure}[h]
+\begin{figure}[H]
   \centering
     \includegraphics[width=0.7\textwidth]{img/Cadena6v2.png}
   \caption{Cadena con nodo central (caso 2)}
@@ -131,14 +133,14 @@ Finalmente decidimos elaborar un grafo m\'as complejo con un esquema en el que s
 \end{figure}
 
 
-\begin{figure}[h]
+\begin{figure}[H]
 	\centering
 	\includegraphics[width=0.9\textwidth]{img/links_salientes_25.png}
 	\caption{Nodos con muchos links salientes}
 	\label{fig:Nodos con muchos links salientes}
 \end{figure}
 
-\begin{figure}[h]
+\begin{figure}[H]
 	\centering
 	\includegraphics[width=0.7\textwidth]{img/links_entrantes_25.png}
 	\caption{Nodos con muchos links entrantes}
