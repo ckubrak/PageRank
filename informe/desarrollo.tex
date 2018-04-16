@@ -1,7 +1,7 @@
 
 \par Las relaciones entre p\'aginas forman un grafo y resulta conveniente almacenarlos como una
-matriz de uno y ceros, done el un uno en la poscici\'on $ij$ representa que la p\'agina $j$ apunta a la $i$.
-A\'un as\'i esta implementaci\'ion tiene un problema: debe almacenar $n^2$ elementos, donde solo importan
+matriz de uno y ceros, donde el uno en la posici\'on $ij$ representa que la p\'agina $j$ apunta a la $i$.
+A\'un as\'i esta implementac\'ion tiene un problema: debe almacenar $n^2$ elementos, donde solo importan
 $m$ (la cantidad de unos). En la pr\'actica, $m \ll n^2$ (ya que no todas las p\'aginas se relacionan
 con todos). Es por esto que decidimos utilizar matrices \textit{ralas}: un tipo de matriz donde solo
 importa donde hay unos, es decir, qu\'e p\'agina apunta a cu\'al.
@@ -40,7 +40,7 @@ resulta pr\'actico y eficiente utilizar Eliminación Gaussiana:
 adem\'as hay que asegurarse que los elementos est\'en definidos antes de operar con ellos. M\'as a\'un, dado que la resoluci\'on
 del sistema no es m\'as que una aproximaci\'on, es necesario definir un $\varepsilon > 0$ para determinar qu\'e tan bien queremos que 
 aproxime a la soluci\'on real; si bien un $\varepsilon$ m\'as chico producir\'ia una mejor aproximaci\'on, tambi\'en ralentiza la
-ejecuci\'on del algoritmo. Es por esto, que junto con la esparsidad ($\delta = 1 - \frac{m}{n^2}$), decidimos hacer un an\'alisis
+ejecuci\'on del algoritmo. Es por esto, que junto con la esparcidad ($\delta = 1 - \frac{m}{n^2}$), decidimos hacer un an\'alisis
 sobre el taman\~no del $\varepsilon$ por lo que el algoritmo de resoluci\'on queda:
 
 \begin{codebox}\label{elimGaussRala}
