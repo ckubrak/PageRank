@@ -70,6 +70,8 @@ En este caso esperamos que los nodos que sirven como final sean de los m\'as pro
 
 Resultado: Debido a la diferencia de caminos, uno de los nodos finales se impuso como m\'as probable, seguido por los nodos pertenecientes al ciclo, luego de estos, el otro nodo final y el nodo nexo.
 
+En la figura \ref{fig:Ranking con distintas probabilidades} la linea marrón representa el ranking utilizando $p = 0.80$, la celeste con $p = 0.60$, la azul con $p = 0.40 $ y la negra con $p = 0.2$. Efectivamente corroboramos nuestra hipotesis acerca de este experimento. Podemos ver que una probabilidad menor hace que el gr\'afico se asemeje m\'as al de una recta, es decir, un ranking con un peso similar en todas las p\'aginas.
+
 
 En las figuras \ref{fig:Ranking cadena simple}, \ref{fig:Ranking cadena con nodo central}, \ref{fig:Ranking nodos con muchos links salientes} y \ref{fig:Ranking nodos con muchos links entrantes} se pueden observar los resultados de los experimentos expuestos en el desarrollo.
 Otros gráficos y tablas se pueden encontrar en el apéndice.
@@ -150,4 +152,12 @@ Otros gráficos y tablas se pueden encontrar en el apéndice.
 	\includegraphics[width=0.7\textwidth]{img/links_entrantes_25.png}
 	\caption{Nodos con muchos links entrantes}
 	\label{fig:Ranking nodos con muchos links entrantes}
+\end{figure}
+
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.7\textwidth]{img/comparativo.png}
+	\caption{Ranking con distintas probabilidades}
+	\label{fig:Ranking con distintas probabilidades}
 \end{figure}
