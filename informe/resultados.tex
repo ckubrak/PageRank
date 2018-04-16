@@ -42,7 +42,9 @@ tiempo.
 
 \paragraph{Tests cualitativos}
 
-Casos con 25 nodos links entrantes: En este grafo hay dos nodos en los cuales se concentran muchos links entrantes de cada subgrafo, estos dos nodos tienen cada uno un link que apunta al mismo nodo, este a su vez, retroalimenta el ciclo, apuntando a los nodos mas bajos de la cadena.
+Para armar nuestros experimentos, tomamos un p = 0.80, un valor cercano al de los casos dados por la c\'atedra. Y si bien los casos pr\'acticos del rankeador se presentan con un n mucho mayor, elegimos 25, una cantidad de p\'aginas acotada para que nuestro ejemplo no deje de ser facilmente comprensible.
+
+Links entrantes: En este grafo hay dos nodos en los cuales se concentran muchos links entrantes de cada subgrafo, estos dos nodos tienen cada uno un link que apunta al mismo nodo, este a su vez, retroalimenta el ciclo, apuntando a los nodos mas bajos de la cadena.
 En este caso esperamos ver que los nodos mas pesados del grafo sean aquellos que reciben muchos links entrantes, y el nodo al que apuntan los dos previamente mencionados.
 
 Resultado: El nodo que tiene las dos entradas resulta ser el mas importante, y los dos nodos con muchas entradas son los segundos m\'as importantes. 
@@ -64,7 +66,7 @@ El resultado esperado en este caso es que los nodos del ciclo tengan mayor peso 
 
 Resultado: Los nodos m\'as probables en este caso resultaron ser los nodos del ciclo y tambi\'en el nodo que conecta las dos partes del grafo.
 
-Links a ciclo al reves: En este caso, hay dos mitades del grafo, una con ciclos y otra con dos nodos sin links salientes que sirven como final para la mayor\'ia de caminos posibles, dichas partes est\'an conectadas por un \'unico nodo.
+Links a ciclo al rev\'es: En este caso, hay dos mitades del grafo, una con ciclos y otra con dos nodos sin links salientes que sirven como final para la mayor\'ia de caminos posibles, dichas partes est\'an conectadas por un \'unico nodo.
 
 En este caso esperamos que los nodos que sirven como final sean de los m\'as probables, tambi\'en que los nodos que ciclan y el nodo nexo lo sean.
 
