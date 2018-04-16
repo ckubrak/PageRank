@@ -1,7 +1,7 @@
 
 \paragraph{Variaci\'on de la \textit{sparcity}}
-Al variar la relaci\'on de cantidad de links frente al tama\~no de la matriz, estamos cambiando que tan rala es la matriz. Para analizar esto,
-tomamos en cuenta la \textit{sparcity} la cual representaremos de ahora en m\'as como $\delta = 1 - \frac{n}{m^2}$. A continuaci\'on se muestra 
+Al variar la relaci\'on de la cantidad de links frente al tama\~no de la matriz, estamos cambiando que tan rala es la matriz. Para analizar esto,
+tomamos en cuenta la \textit{sparcity}, la cual representaremos de ahora en m\'as como $\delta = 1 - \frac{n}{m^2}$. A continuaci\'on se muestra 
 el gr\'afico obtenido a partir de la experimentiaci\'on dejando fijos $n = 100$, $p = 0.8$, $\varepsilon = 10^{-5}$ y variando $m$ desde $100$
 hasta $8000$ de a $100$.
 \begin{figure}[H] 
@@ -51,10 +51,11 @@ Resultado: El nodo que tiene las dos entradas resulta ser el mas importante, y l
 
 Links salientes: Este grafo es similar al anterior, pero los links tienen las direcciones invertidas, por lo tanto, en este grafo los nodos con muchos salientes terminan concentrando su peso en el nodo que retroalimenta el ciclo apuntando a los dos nodos con muchos links salientes.
 En este experimento esperamos que el nodo con mayor probabilidad sea el que retroalimenta el ciclo, y que los nodos a los que esto apunta sean los siguientes con mayor probabilidad.
-
+\\
+\\
 Resultado: El nodo que concentra todos los caminos y retroalimenta el ciclo resulta ser el nodo mas importante del grafo, seguido por los nodos con muchos links salientes, y a medida que se avanza en el ciclo, las probabilidades van bajando.
 
-Links grafos separados: En este caso, hay 3 subgrafos sin conexi\'on entre ellos, no hay ning\'un tipo de estancamiento, es decir, todos los nodos tienen links salientes.
+Links grafos separados: En este caso, hay tres subgrafos sin conexi\'on entre ellos, no hay ning\'un tipo de estancamiento, es decir, todos los nodos tienen links salientes.
 
 En este experimento esperamos que los nodos con m\'as probabilidad sean aquellos que reciben el \'unico link saliente de otro nodo, o aquellos que sean un paso obligado para unir dos partes distintas de cada subgrafo.
 
